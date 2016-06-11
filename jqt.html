@@ -1,79 +1,216 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
 </head>
 <body>
-    <script src="http://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-
-    <a href="index.html">:H:</a>
-
-    <div class="container">
-        <h2>Small Modal</h2>
-        <!-- Trigger the modal with a button -->
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Small Modal</button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Modal Header</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>This is a small modal.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+            <div data-role="header">
+                <h1>GSC Match Setup</h1>
+                <a href="index.html" data-icon="home"> : </a>
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+                        <li><a href="#" data-icon="home">Home</a></li>
+                        <li><a href="#" data-icon="arrow-r">Next</a></li>
+                            <li><a href="#" data-icon="plus">More</a></li>
+                            <li><a href="#" data-icon="minus">Less</a></li>
+                            <li><a href="#" data-icon="delete">Delete</a></li>
+                            <li><a href="#" data-icon="check">Like</a></li>
+                            <li><a href="#" data-icon="info">Information</a></li>
+                            <li><a href="#" data-icon="forward">Go Forward</a></li>
+                            <li><a href="#" data-icon="back">Go Back</a></li>
+                            <li><a href="#" data-icon="star">Star</a></li>
+                            <li><a href="#" data-icon="gear">Options</a></li>
+                            <li><a href="#" data-icon="search">Search</a></li>
+                        </ul>
                 </div>
             </div>
-        </div>
-    </div>
+        <div data-role="page" id="pageone">
+            <div data-role="panel" id="overlayPanel" data-display="overlay">
+                <h2>Overlay Panel</h2>
+                <p>You can close the panel by clicking outside the panel, pressing the Esc key, by swiping, or by clicking the button below:</p>
+                <a href="#pageone" data-rel="close" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left">Close panel</a>
+            </div>
+            <div data-role="panel" id="revealPanel" data-display="reveal">
+                <h2>Reveal Panel</h2>
+                <p>You can close the panel by clicking outside the panel, pressing the Esc key, by swiping, or by clicking the button below:</p>
+                <a href="#pageone" data-rel="close" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left">Close panel</a>
+            </div>
+            <div data-role="panel" id="pushPanel" data-display="push">
+                <h2>Push Panel</h2>
+                <p>You can close the panel by clicking outside the panel, pressing the Esc key, by swiping, or by clicking the button below:</p>
+                <a href="#pageone" data-rel="close" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left">Close panel</a>
+            </div>
 
-        <div class="container">
-            <h2>Inline form: control states</h2>
-            <form class="form-inline" role="form">
-                <div class="form-group">
-                    <label for="focusedInput">Focused</label>
-                    <input class="form-control" id="focusedInput" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword">Disabled</label>
-                    <input class="form-control" id="disabledInput" type="text" disabled>
-                </div>
-                <div class="form-group has-success has-feedback">
-                    <label for="inputSuccess2">Input with success</label>
-                    <input type="text" class="form-control" id="inputSuccess2">
-                    <span class="glyphicon glyphicon-ok form-control-feedback"></span>
-                </div>
-                <div class="form-group has-warning has-feedback">
-                    <label for="inputWarning2">Input with warning</label>
-                    <input type="text" class="form-control" id="inputWarning2">
-                    <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
-                </div>
-                <div class="form-group has-error has-feedback">
-                    <label for="inputError2">Input with error</label>
-                    <input type="text" class="form-control" id="inputError2">
-                    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-                </div>
-            </form>
-        </div>
+            <div data-role="main" class="ui-content">
 
-        <div ng-app="">
+                    <!-- Popup -->
+                    <a href="#myPopup" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all">Show Popup</a>
 
-            <p ng-hide="true">I am not visible.</p>
+                    <div data-role="popup" id="myPopup" class="ui-content">
+                        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                        <p>I have a close button at the top right corner.</p>
+                        <p><b>Tip:</b> You can also click outside to close me.</p>
+                    </div>  <!-- end Popup -->
 
-            <p ng-hide="false">I am visible.</p>
+                <!-- collapsible set -->            <div data-role="collapsibleset">
+                        <div data-role="collapsible" data-mini="true">
+                            <h3>Click me - I'm collapsible!</h3>
+                            <p>I'm the expanded content.</p>
+                        </div>
+                        <div data-role="collapsible" data-mini="true" data-collapsed="false" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
+                            <h1>Click me - I'm collapsible!</h1>
+                            <p>I'm the expanded content.</p>
+                            <div data-role="collapsible" data-mini="true">
+                                <h3>Click me - I'm a nested collapsible block!</h3>
+                                <p>I'm the expanded content in the nested collapsible block.</p>
+                            </div>
+                        </div>
+                    </div>
+            
+            <!-- panels -->                   <p>Click on one of the the buttons to open the Panel with different display modes.</p>
+                    <a href="#overlayPanel" class="ui-btn ui-btn-inline ui-corner-all ui-shadow">Overlay Panel</a>
+                    <a href="#revealPanel" class="ui-btn ui-btn-inline ui-corner-all ui-shadow">Reveal Panel</a>
+                    <a href="#pushPanel" class="ui-btn ui-btn-inline ui-corner-all ui-shadow">Push Panel</a>
+                
+            <!-- columns toggle -->        <table data-role="table" data-mode="columntoggle" class="ui-responsive" data-column-btn-text="hide/show columns" id="myTable">
+                    <thead>
+                        <tr>
+                            <th data-priority="6">CustomerID</th>
+                            <th>CustomerName</th>
+                            <th data-priority="1">ContactName</th>
+                            <th data-priority="4">Address</th>
+                            <th data-priority="2">City</th>
+                            <th data-priority="5">PostalCode</th>
+                            <th data-priority="3">Country</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Alfreds Futterkiste</td>
+                            <td>Maria Anders</td>
+                            <td>Obere Str. 57</td>
+                            <td>Berlin</td>
+                            <td>12209</td>
+                            <td>Germany</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Antonio Moreno Taquería</td>
+                            <td>Antonio Moreno</td>
+                            <td>Mataderos 2312</td>
+                            <td>México D.F.</td>
+                            <td>05023</td>
+                            <td>Mexico</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Around the Horn</td>
+                            <td>Thomas Hardy</td>
+                            <td>120 Hanover Sq.</td>
+                            <td>London</td>
+                            <td>WA1 1DP</td>
+                            <td>UK</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Berglunds snabbköp</td>
+                            <td>Christina Berglund</td>
+                            <td>Berguvsvägen 8</td>
+                            <td>Luleå</td>
+                            <td>S-958 22</td>
+                            <td>Sweden</td>
+                        </tr>
 
-        </div>
+                    </tbody>
+                </table>   <!-- columns toggle -->
+
+                <div class="ui-grid-x">
+                    <div class="ui-block-a"><span>1</span></div>
+                    <div class="ui-block-b"><span>2</span></div>
+                    <div class="ui-block-c"><span>3</span></div>
+                    <div class="ui-block-c"><span>4</span></div>
+                    <div class="ui-block-c"><span>5</span></div>
+                    <div class="ui-block-c"><span>6</span></div>
+                    <div class="ui-block-c"><span>7</span></div>
+                    <div class="ui-block-c"><span>8</span></div>
+                </div>
+
+            <!-- ranger slider --> 
+                <form method="post" action="demoform.asp">
+                    <label for="points">Points:</label>
+                    <input type="range" name="points" id="points" value="50" min="0" max="100" data-show-value="true">
+
+                    <div data-role="rangeslider">
+                        <label for="price-min">Price:</label>
+                        <input type="range" name="price-min" id="price-min" value="200" min="0" max="1000">
+                        <label for="price-max">Price:</label>
+                        <input type="range" name="price-max" id="price-max" value="800" min="0" max="1000">
+                    </div>
+
+           <!-- calendar widget, email format validator -->     <form method="post" action="demoform.asp">
+                    <div class="ui-field-contain">
+                        <label for="fullname">Full name:</label>
+                        <input type="text" name="fullname" id="fullname">
+                        <label for="bday">Date of Birth:</label>
+                        <input type="date" name="bday" id="bday">
+                        <label for="email">E-mail:</label>
+                        <input type="email" name="email" id="email" placeholder="Your email..">
+                    </div>
+
+                                                                    <fieldset data-role="controlgroup">
+                                                                        <legend>Choose your gender:</legend>
+                                                                        <label for="male">Male</label>
+                                                                        <input type="radio" name="gender" id="male" value="male">
+                                                                        <label for="female">Female</label>
+                                                                        <input type="radio" name="gender" id="female" value="female">
+                                                                    </fieldset>
+
+                                                                    <label for="day">Select Day</label>
+                                                                    <select name="day" id="day">
+                                                                        <optgroup label="Weekdays">
+                                                                            <option value="mon">Monday</option>
+                                                                            <option value="tue">Tuesday</option>
+                                                                            <option value="wed">Wednesday</option>
+                                                                            <option value="thu">Thursday</option>
+                                                                            <option value="fri">Friday</option>
+                                                                        </optgroup>
+                                                                        <optgroup label="Weekends">
+                                                                            <option value="sat">Saturday</option>
+                                                                            <option value="sun">Sunday</option>
+                                                                        </optgroup>
+                                                                    </select>
+
+
+                                                                        <input type="submit" data-inline="true" value="Submit">
+                                                                    </form>
+
+                </div> <!-- main ui-content -->
+
+            <div data-role="footer">
+                <h1>My Footer</h1>
+            </div>
+
+        </div>  <!-- page pageone -->
+
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    
+    <script>
+$(document).on("pagecreate",function(event){
+  $(window).on("orientationchange",function(){
+    if(window.orientation == 0)
+    {
+      $("p").text("The orientation has changed to portrait!").css({"background-color":"yellow","font-size":"300%"});
+    }
+    else
+    {
+      $("p").text("The orientation has changed to landscape!").css({"background-color":"pink","font-size":"200%"});
+    }
+  });
+});
+    </script>
 
     </body>
 </html>
