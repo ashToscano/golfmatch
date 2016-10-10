@@ -107,7 +107,7 @@ routeJ.controller('mainController', function ($scope, $http, $localStorage, util
         "par": [4,3,4,3,4,4,4,4,4,3,4,5,3,4,4,4,4,5],
         "hcp": [9,15,11,17,13,5,3,7,1,18,12,14,6,8,4,10,2,16]
     }];
-    $http.get('courses.json').success(function (jsonData) {
+    $http.get('https://gwfl.github.io/gsc/courses.json').success(function (jsonData) {
         $scope.vCourses = angular.copy(jsonData);
   });
   $scope.vm00 = { when: " ", loc: " ", pp: 0, ww: 0, tt: 0, 
