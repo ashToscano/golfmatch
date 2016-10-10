@@ -93,9 +93,23 @@ routeJ.factory('utils00', function ($http, $localStorage, $interval) {
 
 // create the controller and inject Angular's $scope
 routeJ.run( function ($localStorage) {
-  if (angular.isUndefined($localStorage.vm)) {
-    $localStorage = $localStorage.$default({mip: false});
+
+  console.log("x0234");
+    
+  if (angular.isUndefined($localStorage.vp)) {
+    $localStorage = $localStorage.$default({ vm: { when: " ", loc: " ", pp: 0, ww: 0, tt: 0, 
+    cp: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], ch: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    jp: 0, pz4: [30, 15, 8, 5, 2, 1, -1, -2, -5], mip: false} });
+
+    $localStorage = $localStorage.$default({ vp: [  { nm: " ", id: "", tm: "", th: 0, ts: 0, tw: 0,
+    s: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    h: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    w: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    u1: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    ld: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    cp: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]  } ] });
   }
+  
 });
 
 // create the controller and inject Angular's $scope
@@ -162,17 +176,20 @@ routeJ.controller('mainController', function ($scope, $http, $localStorage, util
       $scope.saveLS();
     }
   };
-  $scope.calcPz4 = function () {
-    console.log("x0131");
+  $scope.calcTsw = function () {
+    $localStorage.vp[ii].ts = 0;
+    $localStorage.vp[ii].tw = 0;
     for (ii = 0; ii < $localStorage.vm.pp; ii++) {
-      for (jj = 0; jj < 18; jj++) {
-        console.log($localStorage.vp[ii].w[jj], $localStorage.vm.pz4[jj]);
+      for (jj = 0; jj < 6; jj++) {
+        $localStorage.vp[ii].tw += $localStorage.vp[ii].w[jj];
+        $localStorage.vp[ii].ts += $localStorage.vp[ii].s[jj];
       } 
     }
-    
-  //  console.log(ppIdx, hhIdx);
-  //  $localStorage.vp[ppIdx].w[hhIdx] = ppIdx+9;
-  //  $localStorage.vp[ppIdx].w[hhIdx] = $localStorage.vm.pz4[$localStorage.vp[ppIdx].s[hhIdx]+4];
+  };
+  $scope.calcPz4 = function (ppIdx, hhIdx) {
+
+    $localStorage.vp[ppIdx].w[hhIdx] = $localStorage.vm.pz4[$localStorage.vp[ppIdx].s[hhIdx]+4];
+    $scope.calcTsw();
   };
   $scope.menuSel = function(mm) {
     var ii = 0;
@@ -227,6 +244,8 @@ routeJ.controller('mainController', function ($scope, $http, $localStorage, util
 
   $scope.$l_s = $localStorage;
   
-    if (angular.isDefined($localStorage.vm)) { $localStorage.vm.jp = $localStorage.vm.pp * $localStorage.vm.ww; }
+  if (angular.isDefined($localStorage.vm)) { 
+    $localStorage.vm.jp = $localStorage.vm.pp * $localStorage.vm.ww;
+  }
   
 });
