@@ -1,0 +1,8 @@
+.navbar-inverse .navbar-brand {
+  color: #b71c1c;
+}
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
+  color: #ffffff;
+  background-color: #d50000;
+}
