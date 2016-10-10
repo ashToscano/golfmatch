@@ -227,6 +227,6 @@ routeJ.controller('mainController', function ($scope, $http, $localStorage, util
 
   $scope.$l_s = $localStorage;
   
-  $localStorage.vm.jp = $localStorage.vm.pp * $localStorage.vm.ww;
+    if (angular.isDefined($localStorage.vm)) { $localStorage.vm.jp = $localStorage.vm.pp * $localStorage.vm.ww; }
   
 });
