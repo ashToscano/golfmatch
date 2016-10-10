@@ -62,22 +62,22 @@
   <div class="col-xs-11" ng-repeat="pp in xxTimes($l_s.vm.pp)" ng-init="ppIdx = $index">
     <p>
     <div class="col-xs-3 col-sm-3">
-    <span class="btn btn-default btn-xs btn-sm"> 
+    <button class="btn btn-default btn-xs btn-sm" ng-click="calcTsw()"> 
         <span class="navbar-brand">{{$l_s.vp[$index].nm}}</span>
         <span class="badge-info">{{$l_s.vp[ppIdx].th}}</span>  
-    </span>
+    </button>
     <p>
     </div>                  
                     <div class="col-xs-1 col-sm-1">
     </div>                  
                     <div class="col-xs-3 col-sm-3">
     <span class="btn btn-primary btn-xs btn-sm"> 
-      <span class="navbar-brand"> 79 {{ $l_s.vp[ppIdx].ts }}</span>
+      <span class="navbar-brand"> {{ $l_s.vp[ppIdx].ts }}</span>
     </span>
     </div>                  
                     <div class="col-xs-4 col-sm-4">
     <span class="btn btn-success btn-xs btn-sm"> 
-      <span class="navbar-brand"> {{ 32 | currency }} </span>
+      <span class="navbar-brand"> {{ $l_s.vp[ppIdx].tw | currency }} </span>
     </span>
     </div>                  
     <br />  <br />
@@ -105,10 +105,10 @@
     <button class="label label-info"> # {{ hhIdx+1 }} : </button>
   </div>                  
   <div class="col-xs-11 col-sm-11">  
-  <div class="col-xs-4 col-sm-4" ng-repeat="pp in xxTimes($l_s.vm.pp)" ng-init="ppIdx = $index">
+  <div class="col-xs-5 col-sm-5" ng-repeat="pp in xxTimes($l_s.vm.pp)" ng-init="ppIdx = $index">
     <span class="btn btn-default btn-xs btn-sm"> 
         <button class="pull-left btn btn-xs btn-danger" ng-click="$l_s.vp[ppIdx].s[hhIdx] = $l_s.vp[ppIdx].s[hhIdx] - 1"> - </button> 
-        <span class="badge-info">{{$l_s.vp[ppIdx].nm}}</span>  
+        <button class="badge-info"  ng-click="calcPz4(ppIdx, hhIdx)">{{$l_s.vp[ppIdx].nm}}</button>  
         <button class="pull-right btn btn-xs btn-success" ng-click="$l_s.vp[ppIdx].s[hhIdx] = $l_s.vp[ppIdx].s[hhIdx] + 1"> + </button> 
 
         <input class="form-control col-xs-4" ng-model="$l_s.vp[ppIdx].s[hhIdx]" type="number" />
@@ -123,9 +123,6 @@
   </div> 
   </div>                  
   <p>
-  <div class="col-xs-1 col-sm-1">  
-    <button class="label label-info" ng-click="calcPz4(ppIdx, hhIdx)"> $: </button>
-  </div>                  
 </div>
 
 <div class="panel-group" id="accordion">
@@ -252,7 +249,7 @@
             </div>
         </div>
         <br />
-    </div>
+    </div> 
 </form>
             </div>
             <div class="modal-footer">
