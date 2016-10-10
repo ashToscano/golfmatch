@@ -177,9 +177,9 @@ routeJ.controller('mainController', function ($scope, $http, $localStorage, util
     }
   };
   $scope.calcTsw = function () {
-    $localStorage.vp[ii].ts = 0;
-    $localStorage.vp[ii].tw = 0;
     for (ii = 0; ii < $localStorage.vm.pp; ii++) {
+      $localStorage.vp[ii].ts = 0;
+      $localStorage.vp[ii].tw = 0;
       for (jj = 0; jj < 6; jj++) {
         $localStorage.vp[ii].tw += $localStorage.vp[ii].w[jj];
         $localStorage.vp[ii].ts += $localStorage.vp[ii].s[jj];
@@ -187,7 +187,6 @@ routeJ.controller('mainController', function ($scope, $http, $localStorage, util
     }
   };
   $scope.calcPz4 = function (ppIdx, hhIdx) {
-
     $localStorage.vp[ppIdx].w[hhIdx] = $localStorage.vm.pz4[$localStorage.vp[ppIdx].s[hhIdx]+4];
     $scope.calcTsw();
   };
