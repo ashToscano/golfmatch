@@ -87,16 +87,14 @@
 
         <input class="form-control col-xs-4" ng-model="$l_s.vp[ppIdx].s[hhIdx]" type="number" />
     </span>
-
-              <span class="form-control col-xs-4 btn btn-default"> 
-      <button class="badge"> {{ $l_s.vp[ppIdx].w[hhIdx] | currency }} </button>
-    </span>
               <span class="form-control col-xs-4 btn btn-default"> 
       <span class="badge-info"> {{ $l_s.vp[ppIdx].u2[hhIdx] | currency }} </span>
               <button class="pull-left btn btn-xs btn-info" ng-click="adjVP(-1,ppIdx,hhIdx,'u')"> - </button>
               <button class="pull-right btn btn-xs btn-info" ng-click="adjVP(1,ppIdx,hhIdx,'u')"> + </button>
               </span>
-
+              <span class="form-control col-xs-4 btn btn-default"> 
+      <button class="badge"> {{ $l_s.vp[ppIdx].w[hhIdx] | currency }} </button>
+    </span>
               <h4> <br><br><br><br>  </h4>
             </div>
 
