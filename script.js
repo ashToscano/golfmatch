@@ -83,7 +83,7 @@ routeJ.run( function ($rootScope, $localStorage, $http) {
 routeJ.controller('mainController', function ($scope, $http, $localStorage) {
 
   $scope.selCourseF = function () {
-    $localStorage.vm.loc = $scope.selCC.Nm;
+    $localStorage.vm.loc = $scope.selCC.Nm.substring(0,15);
     $localStorage.vm.cp = $scope.selCC.par; 
     $localStorage.vm.ch = $scope.selCC.hcp; 
     $localStorage.vm.jp = $localStorage.vm.pp * $localStorage.vm.ww;
@@ -104,12 +104,6 @@ routeJ.controller('mainController', function ($scope, $http, $localStorage) {
     }
     return aa;
   };
-  $scope.vp18 = function(ii) {
-    for (jj = 0; jj < $scope.$l_s.vm.pp; jj++) {
-      $scope.$l_s.vp[jj].h = $scope.uTH($scope.$l_s.vp[jj].th, $scope.$l_s.vm.ch);
-    }
-  };
-
   $scope.calcTsw = function () {  
     var pz4 = 0; var s = 0;
     $localStorage.vm.jp = $localStorage.vm.pp * $localStorage.vm.ww;
@@ -126,6 +120,12 @@ routeJ.controller('mainController', function ($scope, $http, $localStorage) {
       $localStorage.vm.jp -= $localStorage.vp[ii].tw;
     }  // .\ nested for loops
     $localStorage.vm.mip = true;
+  };
+  $scope.vp18 = function() {
+    for (jj = 0; jj < $scope.$l_s.vm.pp; jj++) {
+      $scope.$l_s.vp[jj].h = $scope.uTH($scope.$l_s.vp[jj].th, $scope.$l_s.vm.ch);
+    }
+    $scope.calcTsw();
   };
   $scope.adjVP = function (kk, ppIdx, hhIdx, ss) {  
     switch (ss) {
@@ -159,10 +159,6 @@ routeJ.controller('mainController', function ($scope, $http, $localStorage) {
     $scope.calcTsw();
   };
 
-  if (angular.isDefined($localStorage.vm) && !$localStorage.vm.mip) { 
-    console.log("vm.pp * .ww:", $localStorage.vm.pp, $localStorage.vm.ww);
-    $localStorage.vm.jp = $localStorage.vm.pp * $localStorage.vm.ww;
-  }
   $scope.$l_s = $localStorage;
   
 });
