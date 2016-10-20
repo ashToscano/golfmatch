@@ -25,6 +25,7 @@ routeJ.run( function ($rootScope, $localStorage, $http) {
     w: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     u1: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     u2: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]  };
+  $rootScope.ww00 = [ { role: "hh", hunted: false, } ];   // hh=3; ww=2; lw=4; bw=3x; pg=2x
   $rootScope.xxTimes = function (nn) {
    var ii = 0;
    var aa = [];
@@ -116,22 +117,45 @@ routeJ.controller('mainController', function ($scope, $http, $localStorage) {
       $localStorage.vp[ii].ts = 0;
       $localStorage.vp[ii].tw = 0;
       for (jj = 0; jj < 18; jj++) {
-        pz4 = $localStorage.vm.pz4[$localStorage.vp[ii].s[jj] +4];
-        s = $localStorage.vp[ii].s[jj];
+        s = $localStorage.vp[ii].s[jj] - $localStorage.vp[ii].h[jj];
+        pz4 = $localStorage.vm.pz4[s +4];
         $localStorage.vp[ii].w[jj] = pz4;
         $localStorage.vp[ii].tw += pz4 + $localStorage.vp[ii].u2[jj];
-        $localStorage.vp[ii].ts += s + $localStorage.vm.cp[jj];
+        $localStorage.vp[ii].ts += $localStorage.vp[ii].s[jj] + $localStorage.vm.cp[jj];
       }
       $localStorage.vm.jp -= $localStorage.vp[ii].tw;
     }  // .\ nested for loops
     $localStorage.vm.mip = true;
   };
-  $scope.adjVPs = function (kk, ppIdx, hhIdx) {  
+  $scope.adjVP = function (kk, ppIdx, hhIdx, ss) {  
+    switch (ss) {
+      case 's':
     $localStorage.vp[ppIdx].s[hhIdx] = $localStorage.vp[ppIdx].s[hhIdx] + kk;
+        break;
+      case 'u':
+        $localStorage.vp[ppIdx].u2[hhIdx] = $localStorage.vp[ppIdx].u2[hhIdx] + kk;
+        break;
+      default:
+        break;
+    }
     $scope.calcTsw();
   };
-  $scope.adjVPu2 = function (kk, ppIdx, hhIdx) {  
-    $localStorage.vp[ppIdx].u2[hhIdx] = $localStorage.vp[ppIdx].u2[hhIdx] + kk;
+
+  $scope.wolfPts = function (role, winner, hhIdx, ppIdx) {  
+
+      //  2 wolves win 2 points each
+      //  hunters win 3 points each
+      //  lone wolf wins 4 points
+      //  Blind Wolf: Triple Points for everyone
+      //  Pig:  Double Points for everyone
+
+    switch (role) {
+      case 'ww':    //  ww, hh, lw, bw, pg
+      //  2 wolves win 2 points each
+        break;
+      default:
+        break;
+    }
     $scope.calcTsw();
   };
 
