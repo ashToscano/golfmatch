@@ -20,7 +20,7 @@ routeJ.run( function ($rootScope, $localStorage, $http) {
   $rootScope.vm00 = { when: " ", loc: " ", pp: 0, ww: 0, tt: 0, 
     cp: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], ch: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     jp: 0, pz4: [30, 15, 8, 5, 2, 0, -2, -4, -6, -8], mip: false };
-  $rootScope.vp00 = { nm: " ", id: "", tm: "", th: 0, ts: 0, tw: 0,
+  $rootScope.vp00 = { nm: " ", id: "", tm: "", th: 0, ts: 0, tw: 0, wolfPts: 0,
     wolf: [ { role: "", pts: 0, winner: false } ], 
     s: [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
     h: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -113,7 +113,7 @@ routeJ.controller('mainController', function ($scope, $http, $localStorage) {
   };
 
   $scope.calcTsw = function () {  
-    var pz4 = 0; var s = 0;
+    var pz4 = 0; var s = 0; var wxx = 1;
     $localStorage.vm.jp = $localStorage.vm.pp * $localStorage.vm.ww;
     for (ii = 0; ii < $localStorage.vm.pp; ii++) {
       $localStorage.vp[ii].ts = 0;
@@ -125,6 +125,33 @@ routeJ.controller('mainController', function ($scope, $http, $localStorage) {
         $localStorage.vp[ii].w[jj] = pz4;
         $localStorage.vp[ii].tw += pz4 + $localStorage.vp[ii].u2[jj];
         $localStorage.vp[ii].ts += $localStorage.vp[ii].s[jj] + $localStorage.vm.cp[jj];
+
+        if ($localStorage.vp[ii].wolf[jj].winner) {
+          wxx = 1;
+          switch ($localStorage.vp[ii].wolf[jj].role) {
+            case 'HH': 
+              $localStorage.vp[ii].wolf[jj].pts = 3;
+              break;
+            case 'WW': 
+              $localStorage.vp[ii].wolf[jj].pts = 2;
+              break;
+            case 'LL': 
+              $localStorage.vp[ii].wolf[jj].pts = 4;
+              break;
+            case 'BB': 
+              $localStorage.vp[ii].wolf[jj].pts = 2;
+              wxx = 3;
+              break;
+            case 'PP': 
+              $localStorage.vp[ii].wolf[jj].pts = 2;
+              wxx = 2;
+              break;
+            default: 
+              break;
+          }
+        $localStorage.vp[ii].wolf[jj].pts *= wxx;
+        $localStorage.vp[ii].wolfPts += $localStorage.vp[ii].wolf[jj].pts; 
+        }
        } }
       $localStorage.vm.jp -= $localStorage.vp[ii].tw;
     }  // .\ nested for loops
