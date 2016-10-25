@@ -13,14 +13,16 @@ routeJ.run( function ($rootScope, $localStorage, $http) {
         "par": [4,3,4,3,4,4,4,4,4,3,4,5,3,4,4,4,4,5],
         "hcp": [9,15,11,17,13,5,3,7,1,18,12,14,6,8,4,10,2,16]
   }];
-  $http.get('https://gwfl.github.io/gsc/courses.json').success(function (jsonData) {
+  //  https://gwfl.github.io/gsc/courses.json
+  $http.get('courses.json').success(function (jsonData) {
    $rootScope.vCourses = angular.copy(jsonData);
   });
   $rootScope.vm00 = { when: " ", loc: " ", pp: 0, ww: 0, tt: 0, 
     cp: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], ch: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     jp: 0, pz4: [30, 15, 8, 5, 2, 0, -2, -4, -6, -8], mip: false };
   $rootScope.vp00 = { nm: " ", id: "", tm: "", th: 0, ts: 0, tw: 0,
-    s: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    wolf: [ { role: "", pts: 0, winner: false } ], 
+    s: [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
     h: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     w: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     u1: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -104,6 +106,12 @@ routeJ.controller('mainController', function ($scope, $http, $localStorage) {
     }
     return aa;
   };
+  $scope.vp18 = function(ii) {
+    for (jj = 0; jj < $scope.$l_s.vm.pp; jj++) {
+      $scope.$l_s.vp[jj].h = $scope.uTH($scope.$l_s.vp[jj].th, $scope.$l_s.vm.ch);
+    }
+  };
+
   $scope.calcTsw = function () {  
     var pz4 = 0; var s = 0;
     $localStorage.vm.jp = $localStorage.vm.pp * $localStorage.vm.ww;
@@ -111,26 +119,21 @@ routeJ.controller('mainController', function ($scope, $http, $localStorage) {
       $localStorage.vp[ii].ts = 0;
       $localStorage.vp[ii].tw = 0;
       for (jj = 0; jj < 18; jj++) {
+       if ($localStorage.vp[ii].s[jj] !== null) {
         s = $localStorage.vp[ii].s[jj] - $localStorage.vp[ii].h[jj];
         pz4 = $localStorage.vm.pz4[s +4];
         $localStorage.vp[ii].w[jj] = pz4;
         $localStorage.vp[ii].tw += pz4 + $localStorage.vp[ii].u2[jj];
         $localStorage.vp[ii].ts += $localStorage.vp[ii].s[jj] + $localStorage.vm.cp[jj];
-      }
+       } }
       $localStorage.vm.jp -= $localStorage.vp[ii].tw;
     }  // .\ nested for loops
     $localStorage.vm.mip = true;
   };
-  $scope.vp18 = function() {
-    for (jj = 0; jj < $scope.$l_s.vm.pp; jj++) {
-      $scope.$l_s.vp[jj].h = $scope.uTH($scope.$l_s.vp[jj].th, $scope.$l_s.vm.ch);
-    }
-    $scope.calcTsw();
-  };
   $scope.adjVP = function (kk, ppIdx, hhIdx, ss) {  
     switch (ss) {
       case 's':
-    $localStorage.vp[ppIdx].s[hhIdx] = $localStorage.vp[ppIdx].s[hhIdx] + kk;
+        $localStorage.vp[ppIdx].s[hhIdx] = $localStorage.vp[ppIdx].s[hhIdx] + kk;
         break;
       case 'u':
         $localStorage.vp[ppIdx].u2[hhIdx] = $localStorage.vp[ppIdx].u2[hhIdx] + kk;
@@ -159,6 +162,10 @@ routeJ.controller('mainController', function ($scope, $http, $localStorage) {
     $scope.calcTsw();
   };
 
+  if (angular.isDefined($localStorage.vm) && !$localStorage.vm.mip) { 
+    console.log("vm.pp * .ww:", $localStorage.vm.pp, $localStorage.vm.ww);
+    $localStorage.vm.jp = $localStorage.vm.pp * $localStorage.vm.ww;
+  }
   $scope.$l_s = $localStorage;
   
 });
