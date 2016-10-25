@@ -62,6 +62,7 @@
       <span class="navbar-brand"> {{ $l_s.vp[ppIdx].tw | currency }} </span>
     </span>
     <h4> <br>  </h4>
+
     <div class="panel">
       <div class="panel-heading">
         <h2> </h2>
@@ -75,11 +76,12 @@
       <div id="acc0panel{{ppIdx}}" class="panel-collapse collapse">
         <div class="panel-body">
 
+
               <div class="row container-fluid">
           <span class="label label-info">{{ $l_s.vm.ch }}</span> <br />
           <span class="label label-default">h: {{$l_s.vp[ppIdx].h}}:</span>      
               </div>
-          
+
           <div class="row">
 
             <div class="col-xs-4 col-sm-4 col-md-4" ng-repeat="hh in xxTimes(18)" ng-init="hhIdx = $index">
@@ -133,29 +135,6 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#accpanel2">
-        PRIZES: </a>
-      </h4>
-      </div>
-      <div id="accpanel2" class="panel-collapse collapse">
-        <div class="panel-body">
-
-          <div class="row">
-            <div class="col-xs-3" ng-repeat="ss in xxTimes(10)">
-              <span class="label label-default"> [: {{$index - 4}} :] </span>
-              <input class="form-control col-xs-3" ng-model="$l_s.vm.pz4[$index]" type="number" />
-            </div>
-          </div>
-
-          <p>
-            <h4> <br>  </h4> <a class="pull-left" href="#"><i class="fa fa-home"></i> Top </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#accpanel1">
         ALL Scores: </a>
       </h4>
@@ -195,8 +174,87 @@
                 <h4> <br><br><br><br>  </h4>
               </div>
             </div>
+      <h4> <br>  </h4>
+
           </div>
 
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#accpanelWW">
+        WOLF Scores: </a>
+      </h4>
+      </div>
+      <div id="accpanelWW" class="panel-collapse collapse">
+        <div class="panel-body">
+
+    <div class="row" ng-repeat="hh in xxTimes(18)" ng-init="hhIdx = $index">
+      <button class="label label-info"> # {{ hhIdx+1 }} : </button> 
+      <a class="pull-right" href="#"><i class="fa fa-home"></i> Top </a>
+
+      <div class="row" ng-repeat="pp in xxTimes($l_s.vm.pp)" ng-init="ppIdx = $index">
+
+    <h4>  </h4>
+
+      <button class="col-xs-3 btn btn-info btn-xs btn-sm" ng-click="calcTsw()">
+      <span class="navbar-brand">{{$l_s.vp[ppIdx].nm}}</span>
+      <span class="badge badge-info"> ({{$l_s.vp[ppIdx].th}})</span> <br>
+      <span class="badge badge-info"> {{$l_s.vp[ppIdx].wolf[hhIdx].role}} </span>
+<div class="check-element" ng-show="$l_s.vp[ppIdx].wolf[hhIdx].winner">
+    <span class="glyphicon glyphicon-thumbs-up"></span> 
+  </div>
+    </button>
+                    <div class="col-xs-3">
+                  <span class="label label-default">Role:</span>
+  <select ng-model="$l_s.vp[ppIdx].wolf[hhIdx].role">
+    <option value="WW">Wolf
+    <option value="HH">Hunter
+    <option value="LL">Lone-W
+    <option value="BB">Blind-W
+    <option value="PP">(pig)
+  </select>                </div>
+
+                      <span class="col-xs-3 btn btn-default btn-xs btn-sm"> 
+        <button class="pull-left btn btn-xs btn-danger" ng-click="adjVP(-1,ppIdx,hhIdx,'s')"> - </button> 
+win:<br/> <input type="checkbox" ng-model="$l_s.vp[ppIdx].wolf[hhIdx].winner">
+<button class="pull-right btn btn-xs btn-success" ng-click="adjVP(1,ppIdx,hhIdx,'s')"> + </button> 
+
+        <input class="form-control" ng-model="$l_s.vp[ppIdx].s[hhIdx]" type="number" />
+    </span>
+
+      <h4> <br>  </h4>
+</div>
+      <h4> <br>  </h4>
+<hr>
+      </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#accpanel2">
+        PRIZES: </a>
+      </h4>
+      </div>
+      <div id="accpanel2" class="panel-collapse collapse">
+        <div class="panel-body">
+
+          <div class="row">
+            <div class="col-xs-3" ng-repeat="ss in xxTimes(10)">
+              <span class="label label-default"> [: {{$index - 4}} :] </span>
+              <input class="form-control col-xs-3" ng-model="$l_s.vm.pz4[$index]" type="number" />
+            </div>
+          </div>
+
+          <p>
+            <h4> <br>  </h4> <a class="pull-left" href="#"><i class="fa fa-home"></i> Top </a>
         </div>
       </div>
     </div>
@@ -292,50 +350,6 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="pull-right col-xs-2 btn btn-primary btn-xs" ng-click="vp18($index)" data-dismiss="modal">Go</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- end Modal -->
-
-  <!-- Modal -->
-  <div class="modal fade" id="wolfM01" tabindex="-1" role="dialog" aria-labelledby="wolfM01Lbl">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="wolfM01Lbl">WOLF: {{hhIdx}}</h4>
-        </div>
-        <div class="modal-body">
-
-          <h4>HUNTED: <input id="hunted" type="checkbox" ng-model="wHunted" ng-checked="wHunted">  </h4>
-
-          <div class="row" ng-repeat="pp in xxTimes($l_s.vm.pp)" ng-init='ppIdx = $index; wwIdx1 = "hh";wwIdx2 = "hh";wwIdx3 = "hh";wwIdx4 = "hh";wwIdx5 = "hh"; '>
-
-            <span class="col-xs-1"> </span>
-            <button class="col-xs-4 btn btn-default btn-xs btn-sm" ng-click="calcTsw()">
-              <span class="navbar-brand"> {{$l_s.vp[ppIdx].nm}}</span>
-              <span class="badge badge-info"> ({{$l_s.vp[ppIdx].th}})</span>
-              <br>
-              <br>
-              <select ng-change="wwPoints()" ng-model="wwIdx1" ng-options='xx for xx in ["ww", "hh", "lw", "bw", "pg"]'></select>
-            </button>
-            <span class="col-xs-1"> </span>
-            <span class="col-xs-2 btn btn-primary btn-xs btn-sm"> 
-      <span class="navbar-brand"> {{ $l_s.vp[ppIdx].ts }} </span>
-            </span>
-            <span class="col-xs-1"> </span>
-            <span class="col-xs-2 btn btn-default btn-xs btn-sm"> 
-      <span class="navbar-brand"> {{ $l_s.vp[ppIdx].tw }} </span>
-            </span>
-
-            <h4> <br><br><br>  </h4>
-
-          </div>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="pull-right col-xs-2 btn btn-primary btn-xs" data-dismiss="modal">Done</button>
         </div>
       </div>
     </div>
