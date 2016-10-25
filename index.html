@@ -75,6 +75,11 @@
       <div id="acc0panel{{ppIdx}}" class="panel-collapse collapse">
         <div class="panel-body">
 
+              <div class="row container-fluid">
+          <span class="label label-info">{{ $l_s.vm.ch }}</span> <br />
+          <span class="label label-default">h: {{$l_s.vp[ppIdx].h}}:</span>      
+              </div>
+          
           <div class="row">
 
             <div class="col-xs-4 col-sm-4 col-md-4" ng-repeat="hh in xxTimes(18)" ng-init="hhIdx = $index">
