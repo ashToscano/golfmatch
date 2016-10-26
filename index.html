@@ -202,8 +202,7 @@
 
       <button class="col-xs-3 btn btn-info btn-xs btn-sm" ng-click="calcTsw()">
       <span class="navbar-brand">{{$l_s.vp[ppIdx].nm}}</span>
-      <span class="badge badge-info"> ({{$l_s.vp[ppIdx].th}})</span> <br>
-      <span class="badge badge-info"> {{$l_s.vp[ppIdx].wolf[hhIdx].role}} </span>
+      <span class="badge badge-info"> [{{$l_s.vp[ppIdx].wolfPts}}]</span>
 <div class="check-element" ng-show="$l_s.vp[ppIdx].wolf[hhIdx].winner">
     <span class="glyphicon glyphicon-thumbs-up"></span> 
   </div>
@@ -220,7 +219,9 @@
 
                       <span class="col-xs-3 btn btn-default btn-xs btn-sm"> 
         <button class="pull-left btn btn-xs btn-danger" ng-click="adjVP(-1,ppIdx,hhIdx,'s')"> - </button> 
-win:<br/> <input type="checkbox" ng-model="$l_s.vp[ppIdx].wolf[hhIdx].winner">
+win:
+      <span class="badge badge-info"> ({{$l_s.vp[ppIdx].h[hhIdx]}})</span>
+<br/> <input type="checkbox" ng-model="$l_s.vp[ppIdx].wolf[hhIdx].winner">
 <button class="pull-right btn btn-xs btn-success" ng-click="adjVP(1,ppIdx,hhIdx,'s')"> + </button> 
 
         <input class="form-control" ng-model="$l_s.vp[ppIdx].s[hhIdx]" type="number" />
