@@ -114,25 +114,6 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
     $localStorage.vm = angular.copy($rootScope.vm00);
     $rootScope.clearLSvp();
   };  
-  $rootScope.menuSel = function(mm) {
-    var ii = 0;
-  
-    switch (mm) {
-      case 'm1a':
-        angular.element('#mainM01').modal({
-          keyboard: false
-        });
-        break;
-      case 'm2':
-        $scope.clearLSvp();
-        angular.element('#mainM02').modal({
-          keyboard: false
-        });
-        break;
-      default:
-        break;
-    }
-  };
 
   if (angular.isUndefined($localStorage.vm)) {
     $rootScope.clearLSvm();
@@ -261,24 +242,6 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
     { name: 'Barney Calhoun' },
     { name: 'Lamarr the Headcrab' },
   ];
-
-  $ionicModal.fromTemplateUrl('templates/modal.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-  $ionicModal.fromTemplateUrl('templates/modal0.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal0 = modal;
-  });
-  
-  $scope.doneModal = function() {        
-    $scope.$l_s.vm.jp = $scope.$l_s.vm.pp * $scope.$l_s.vm.ww;
-    $scope.$l_s.vp.length = $scope.$l_s.vm.pp;
-//    $scope.contacts.push({ name: u.firstName + ' ' + u.lastName });
-    $scope.modal.hide();
-  };
 
   $scope.groups = [];
   for (var i=0; i<18; i++) {
