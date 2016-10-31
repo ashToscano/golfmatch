@@ -1,10 +1,62 @@
+angular.module('ionicApp', ['ionic', 'ngStorage'])
 
-var routeJ = angular.module('routeH', ['ngRoute', 'ngAnimate', 'ngStorage']);
+.config(function($stateProvider, $urlRouterProvider) {
 
-// create the controller and inject Angular's $scope
-routeJ.run( function ($rootScope, $localStorage, $http) {
+  $stateProvider
+    .state('eventmenu', {
+      url: "/event",
+      abstract: true,
+      templateUrl: "templates/event-menu.html"
+    })
+    .state('eventmenu.home', {
+      url: "/home",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/home.html"
+        }
+      }
+    })
+    .state('eventmenu.match', {
+      url: "/match",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/match.html",
+          controller: "MainCtrl"
+        }
+      }
+    })
+    .state('eventmenu.players', {
+      url: "/players",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/players.html",
+          controller: "MainCtrl"
+        }
+      }
+    })
+    .state('eventmenu.ALLscores', {
+      url: "/ALLscores",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/ALLscores.html",
+          controller: "MainCtrl"
+        }
+      }
+    })
+    .state('eventmenu.wolf', {
+      url: "/wolf",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/wolf.html",
+          controller: "MainCtrl"
+        }
+      }
+    });
+  
+  $urlRouterProvider.otherwise("/event/home");
+})
+.run( function ($rootScope, $localStorage, $http) {
   var ii = 0;  var jj = 0;
-
   // global variables  $rootScope
   $rootScope.vCourses = [{
         "Nm": "Chester Wash",
@@ -50,18 +102,16 @@ routeJ.run( function ($rootScope, $localStorage, $http) {
   };
   $rootScope.clearLSvp = function() {
     delete $localStorage.vp;
-    $localStorage.vp = [];  $localStorage.vp.length = 18;
+    $localStorage.vp = [];  
+    $localStorage.vp.length = $localStorage.vm.pp;
 
-    for (ii = 0; ii < 18; ii++) {
-      $rootScope.vp00.s[ii] = null;
+    for (ii = 0; ii < $localStorage.vm.pp; ii++) {
       $localStorage.vp[ii] = angular.copy($rootScope.vp00);
     }
   };
   $rootScope.clearLSvm = function() {
     $localStorage.$reset();
-    if (angular.isUndefined($localStorage.vm)) {
-      $localStorage.vm = angular.copy($rootScope.vm00);
-    }  
+    $localStorage.vm = angular.copy($rootScope.vm00);
     $rootScope.clearLSvp();
   };  
   $rootScope.menuSel = function(mm) {
@@ -87,16 +137,20 @@ routeJ.run( function ($rootScope, $localStorage, $http) {
   if (angular.isUndefined($localStorage.vm)) {
     $rootScope.clearLSvm();
   }
+
+  //  $rootScope.$l_s = $localStorage;
   
-});
+})
 
-// create the controller and inject Angular's $scope
-routeJ.controller('mainController', function ($scope, $http, $localStorage) {
+.controller('MainCtrl', function($scope, $localStorage, $ionicSideMenuDelegate, $ionicModal) {
 
-  $scope.selCourseF = function () {
-    $localStorage.vm.loc = $scope.selCC.Nm.substring(0,15);
-    $localStorage.vm.cp = $scope.selCC.par; 
-    $localStorage.vm.ch = $scope.selCC.hcp; 
+  // $rootScope.$l_s = $localStorage;
+  $scope.$l_s = $localStorage;
+  
+  $scope.selCourseF = function (selCC) {
+    $localStorage.vm.loc = selCC.Nm.substring(0,15);
+    $localStorage.vm.cp = selCC.par; 
+    $localStorage.vm.ch = selCC.hcp; 
     $localStorage.vm.jp = $localStorage.vm.pp * $localStorage.vm.ww;
   };
   $scope.uTH = function(th, rr) {
@@ -116,8 +170,8 @@ routeJ.controller('mainController', function ($scope, $http, $localStorage) {
     return aa;
   };
   $scope.vp18 = function(ii) {
-    for (jj = 0; jj < $scope.$l_s.vm.pp; jj++) {
-      $scope.$l_s.vp[jj].h = $scope.uTH($scope.$l_s.vp[jj].th, $scope.$l_s.vm.ch);
+    for (jj = 0; jj < $localStorage.vm.pp; jj++) {
+      $localStorage.vp[jj].h = $scope.uTH($localStorage.vp[jj].th, $localStorage.vm.ch);
     }
   };
   $scope.wolfPts = function(jj) {
@@ -188,10 +242,65 @@ routeJ.controller('mainController', function ($scope, $http, $localStorage) {
     }
     $scope.calcTsw();
   };
-
-  if (angular.isDefined($localStorage.vm) && !$localStorage.vm.mip) { 
-    $localStorage.vm.jp = $localStorage.vm.pp * $localStorage.vm.ww;
-  }
-  $scope.$l_s = $localStorage;
   
+  $scope.attendees = [
+    { firstname: 'Nicolas', lastname: 'Cage' },
+    { firstname: 'Jean-Claude', lastname: 'Van Damme' },
+    { firstname: 'Keanu', lastname: 'Reeves' },
+    { firstname: 'Steven', lastname: 'Seagal' }
+  ];
+  
+  $scope.toggleLeft = function() {
+    $ionicSideMenuDelegate.toggleLeft();
+  };
+
+ // .controller('modalCtrl', function($scope, $ionicModal) {
+  
+  $scope.contacts = [
+    { name: 'Gordon Freeman' },
+    { name: 'Barney Calhoun' },
+    { name: 'Lamarr the Headcrab' },
+  ];
+
+  $ionicModal.fromTemplateUrl('templates/modal.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  $ionicModal.fromTemplateUrl('templates/modal0.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal0 = modal;
+  });
+  
+  $scope.doneModal = function() {        
+    $scope.$l_s.vm.jp = $scope.$l_s.vm.pp * $scope.$l_s.vm.ww;
+    $scope.$l_s.vp.length = $scope.$l_s.vm.pp;
+//    $scope.contacts.push({ name: u.firstName + ' ' + u.lastName });
+    $scope.modal.hide();
+  };
+
+  $scope.groups = [];
+  for (var i=0; i<18; i++) {
+    $scope.groups[i] = {
+      name: i+1,
+      items: [],
+      show: false
+    };
+    for (var j=0; j < $localStorage.vm.pp; j++) {
+      $scope.groups[i].items.push(i + '-' + j);
+    }
+  }
+  
+  /*
+   * if given group is the selected group, deselect it
+   * else, select the given group
+   */
+  $scope.toggleGroup = function(group) {
+    group.show = !group.show;
+  };
+  $scope.isGroupShown = function(group) {
+    return group.show;
+  };
+
 });
