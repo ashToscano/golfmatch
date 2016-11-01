@@ -69,7 +69,7 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
   $http.get('https://gwfl.github.io/gsc/courses.json').success(function (jsonData) {
    $rootScope.vCourses = angular.copy(jsonData);
   });
-  $rootScope.vm00 = { when: " ", loc: "click Menu, Setup Match", pp: 0, ww: 0, tt: 0, 
+  $rootScope.vm00 = { when: "click menu", loc: "Setup Match", pp: 0, ww: 0, tt: 0, 
     cp: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], ch: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     jp: 0, pz4: [30, 15, 8, 5, 2, 0, -2, -4, -6, -8], mip: false };
   $rootScope.vp00 = { nm: " ", id: "", tm: "", th: 0, ts: 0, tw: 0, wolfPts: 0,
