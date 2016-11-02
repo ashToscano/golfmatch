@@ -72,7 +72,7 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
   });
   $rootScope.vm00 = { when: "click menu", loc: "Setup Match", pp: 0, ww: 0, tt: 0, 
     cp: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], ch: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    jp: 0, pz4: [50, 50, 50, 50, 30, 15, 8, 5, 2, 0, -2, -4, -6, -8], mip: false };
+    jp: 0, pz4: [30, 15, 8, 5, 2, 0, -2, -4, -6, -8], mip: false };
   $rootScope.vp00 = { nm: " ", id: "", tm: "", th: 0, ts: 0, tw: 0, wolfPts: 0,
     wolf: [ { role: "Hunter", pts: 0, winner: false }, { role: "Hunter", pts: 0, winner: false },
             { role: "Hunter", pts: 0, winner: false }, { role: "Hunter", pts: 0, winner: false },
