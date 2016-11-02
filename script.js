@@ -12,7 +12,8 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
       url: "/home",
       views: {
         'menuContent' :{
-          templateUrl: "templates/home.html"
+          templateUrl: "templates/home.html",
+          controller: "MainCtrl"
         }
       }
     })
@@ -71,23 +72,24 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
   });
   $rootScope.vm00 = { when: "click menu", loc: "Setup Match", pp: 0, ww: 0, tt: 0, 
     cp: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], ch: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    jp: 0, pz4: [30, 15, 8, 5, 2, 0, -2, -4, -6, -8], mip: false };
+    jp: 0, pz4: [50, 50, 50, 50, 30, 15, 8, 5, 2, 0, -2, -4, -6, -8], mip: false };
   $rootScope.vp00 = { nm: " ", id: "", tm: "", th: 0, ts: 0, tw: 0, wolfPts: 0,
-    wolf: [ { role: "", pts: 0, winner: false }, { role: "", pts: 0, winner: false },
-            { role: "", pts: 0, winner: false }, { role: "", pts: 0, winner: false },
-            { role: "", pts: 0, winner: false }, { role: "", pts: 0, winner: false },
-            { role: "", pts: 0, winner: false }, { role: "", pts: 0, winner: false },
-            { role: "", pts: 0, winner: false }, { role: "", pts: 0, winner: false },
-            { role: "", pts: 0, winner: false }, { role: "", pts: 0, winner: false },
-            { role: "", pts: 0, winner: false }, { role: "", pts: 0, winner: false },
-            { role: "", pts: 0, winner: false }, { role: "", pts: 0, winner: false },
-            { role: "", pts: 0, winner: false }, { role: "", pts: 0, winner: false } ], 
+    wolf: [ { role: "Hunter", pts: 0, winner: false }, { role: "Hunter", pts: 0, winner: false },
+            { role: "Hunter", pts: 0, winner: false }, { role: "Hunter", pts: 0, winner: false },
+            { role: "Hunter", pts: 0, winner: false }, { role: "Hunter", pts: 0, winner: false },
+            { role: "Hunter", pts: 0, winner: false }, { role: "Hunter", pts: 0, winner: false },
+            { role: "Hunter", pts: 0, winner: false }, { role: "Hunter", pts: 0, winner: false },
+            { role: "Hunter", pts: 0, winner: false }, { role: "Hunter", pts: 0, winner: false },
+            { role: "Hunter", pts: 0, winner: false }, { role: "Hunter", pts: 0, winner: false },
+            { role: "Hunter", pts: 0, winner: false }, { role: "Hunter", pts: 0, winner: false },
+            { role: "Hunter", pts: 0, winner: false }, { role: "Hunter", pts: 0, winner: false }
+          ], 
     s: [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
     h: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     w: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     u1: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     u2: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]  };
-  $rootScope.wolf00 = { role: "HH", pts: 0, winner: false, };   // hh=3; ww=2; lw=4; bw=3x; pg=2x
+  $rootScope.wwRR = ["Wolf", "Hunter", "Lone-W", "Blind-W", "(pig)"]; 
   $rootScope.xxTimes = function (nn) {
    var ii = 0;
    var aa = [];
@@ -118,16 +120,11 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
   if (angular.isUndefined($localStorage.vm)) {
     $rootScope.clearLSvm();
   }
-
-  //  $rootScope.$l_s = $localStorage;
-  
 })
 
-.controller('MainCtrl', function($scope, $localStorage, $ionicSideMenuDelegate, $ionicModal) {
+.controller('MainCtrl', function($scope, $localStorage, $ionicSideMenuDelegate,
+     $ionicModal, $ionicActionSheet, $ionicPopup, $timeout) {
 
-  // $rootScope.$l_s = $localStorage;
-  $scope.$l_s = $localStorage;
-  
   $scope.selCourseF = function (selCC) {
     $localStorage.vm.loc = selCC.Nm.substring(0,15);
     $localStorage.vm.cp = selCC.par; 
@@ -161,10 +158,10 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
       $localStorage.vp[ii].wolf[jj].pts = 0;
       if ($localStorage.vp[ii].wolf[jj].winner) {
         switch ($localStorage.vp[ii].wolf[jj].role) {
-         case 'HH': 
+         case 'Hunter': 
            $localStorage.vp[ii].wolf[jj].pts = 3;
            break;
-         case 'LL': 
+         case 'Lone-W': 
            $localStorage.vp[ii].wolf[jj].pts = 4;
            break;
          default: 
@@ -173,10 +170,10 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
         }
       }
       switch ($localStorage.vp[ii].wolf[jj].role) {
-       case 'BB': 
+       case 'Blind-W': 
         wxx = 3;
         break;
-       case 'PP': 
+       case '(pig)': 
         wxx = 2;
         break;
        default: 
@@ -204,19 +201,19 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
 
         $scope.wolfPts(jj);
         $localStorage.vp[ii].wolfPts += $localStorage.vp[ii].wolf[jj].pts;
-       }
-      }
+      } }
       $localStorage.vm.jp -= $localStorage.vp[ii].tw;
     }
     $localStorage.vm.mip = true;
   };
   $scope.adjVP = function (kk, ppIdx, hhIdx, ss) {  
+    $localStorage.vp[ppIdx].s[hhIdx] += 0;
     switch (ss) {
       case 's':
-        $localStorage.vp[ppIdx].s[hhIdx] = $localStorage.vp[ppIdx].s[hhIdx] + kk;
+        $localStorage.vp[ppIdx].s[hhIdx] += kk;
         break;
       case 'u':
-        $localStorage.vp[ppIdx].u2[hhIdx] = $localStorage.vp[ppIdx].u2[hhIdx] + kk;
+        $localStorage.vp[ppIdx].u2[hhIdx] += kk;
         break;
       default:
         break;
@@ -224,24 +221,9 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
     $scope.calcTsw();
   };
   
-  $scope.attendees = [
-    { firstname: 'Nicolas', lastname: 'Cage' },
-    { firstname: 'Jean-Claude', lastname: 'Van Damme' },
-    { firstname: 'Keanu', lastname: 'Reeves' },
-    { firstname: 'Steven', lastname: 'Seagal' }
-  ];
-  
   $scope.toggleLeft = function() {
     $ionicSideMenuDelegate.toggleLeft();
   };
-
- // .controller('modalCtrl', function($scope, $ionicModal) {
-  
-  $scope.contacts = [
-    { name: 'Gordon Freeman' },
-    { name: 'Barney Calhoun' },
-    { name: 'Lamarr the Headcrab' },
-  ];
 
   $scope.groups = [];
   for (var i=0; i<18; i++) {
@@ -254,7 +236,6 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
       $scope.groups[i].items.push(i + '-' + j);
     }
   }
-  
   /*
    * if given group is the selected group, deselect it
    * else, select the given group
@@ -265,5 +246,76 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
   $scope.isGroupShown = function(group) {
     return group.show;
   };
+
+  $scope.showActionsheet = function() {
+    $ionicActionSheet.show({
+      titleText: 'ActionSheet Example',
+      buttons: [
+        { text: '<i class="icon ion-share"></i> Share' },
+        { text: '<i class="icon ion-arrow-move"></i> Move' },
+      ],
+      destructiveText: 'Delete',
+      cancelText: 'Cancel',
+      cancel: function() {
+        console.log('CANCELLED');
+      },
+      buttonClicked: function(index) {
+        console.log('BUTTON CLICKED', index);
+        return true;
+      },
+      destructiveButtonClicked: function() {
+        console.log('DESTRUCT');
+        return true;
+      }
+    });
+  };
+ 
+ $scope.selWR = function(wrv,ppIdx,hhIdx) {
+   $localStorage.vp[ppIdx].wolf[hhIdx].role = wrv;
+   $scope.myPopup.close();
+ };
+ // Triggered on a button click, or some other target
+ $scope.wrPop = function(ppIdx,hhIdx) {
+
+  $scope.ppIdx = ppIdx;
+  $scope.hhIdx = hhIdx;
+  
+  $scope.adjVP(0,ppIdx,hhIdx,'s');
+  
+   // An elaborate, custom popup
+  $scope.myPopup = $ionicPopup.show({
+     templateUrl: 'wrPopup.html',
+     title: 'Select Role',
+     scope: $scope
+   });
+ };
+
+$scope.$l_s = $localStorage;
+
+   // A confirm dialog
+   $scope.showConfirm = function() {
+     var confirmPopup = $ionicPopup.confirm({
+       title: 'Consume Ice Cream',
+       template: 'Are you sure you want to eat this ice cream?'
+     });
+     confirmPopup.then(function(res) {
+       if(res) {
+         console.log('You are sure');
+       } else {
+         console.log('You are not sure');
+       }
+     });
+   };
+
+   // An alert dialog
+   $scope.showAlert = function() {
+     var alertPopup = $ionicPopup.alert({
+       title: 'Don\'t eat that!',
+       template: 'It might taste good'
+     });
+     alertPopup.then(function(res) {
+       console.log('Thank you for not eating my delicious ice cream cone');
+     });
+   };
 
 });
