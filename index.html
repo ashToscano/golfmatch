@@ -182,9 +182,10 @@
  ng-show="isGroupShown(group)">
 
 <div class="row">  <div class="col-33">
-<button class="button button-large button-dark" ng-click="calcTsw()">{{$l_s.vp[ppIdx].nm}}
-  <span class="button button-small button-stable">({{$l_s.vp[ppIdx].th}})</span><br>
-  <span class="button button-calm">Pts: {{$l_s.vp[ppIdx].wolfPts}}</span></button>
+<span class="button" ng-click="calcTsw()">
+  <button class="button button-energized">{{$l_s.vp[ppIdx].nm}}</button><br />
+  <span class="button button-small">{{$l_s.vp[ppIdx].th}}</span><br />
+  <span class="button button-small button-light">Points: {{$l_s.vp[ppIdx].wolfPts}}</span></span>
 </div>
 <div class="col text-center">
   <button class="button button-small button-assertive" ng-click="adjVP(-1,ppIdx,hhIdx,'s')"> - </button> 
