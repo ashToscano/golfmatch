@@ -71,30 +71,34 @@
     </script>
 
     <script id="templates/home.html" type="text/ng-template">
-      <ion-view view-title="{{$l_s.vm.when}} . {{$l_s.vm.loc}}">
+      <ion-view view-title="Golf Match">
         <ion-content>
-
+<ion-list><ion-item>
+  <div class="row"> 
+  <div class="col">            <span class="button button-small button-light">{{$l_s.vm.loc}}  </span>
+            <span class="badge badge-light"> {{$l_s.vm.when}} </span>
+</div>
+<div class="col"></div>
+  </div>
+</ion-item></ion-list>
 <div  class="list card" ng-repeat="pp in xxTimes($l_s.vm.pp)" ng-init="ppIdx = $index">
   <div class="row">  <div class="col-50">
-<button class="button button-large" ng-click="calcTsw()"><span class="badge badge-light">{{$l_s.vp[ppIdx].nm}}</span>
-  <span class="badge">{{$l_s.vp[ppIdx].th}}</span></button>
-</div>
-<div class="col"><button class="button button-positive"> {{ $l_s.vp[ppIdx].ts }} 
+<button class="button" ng-click="calcTsw()"><span class="badge badge-energized">{{$l_s.vp[ppIdx].nm}}</span>
+  <span class="badge">{{$l_s.vp[ppIdx].th}}</span><br />
+            <span class="badge">Points: </span>
+<span class="badge badge-royal"> {{ $l_s.vp[ppIdx].wolfPts }} </span>
 </button></div>
-<div class="col">
-<button class="button button-balanced"> {{ $l_s.vp[ppIdx].tw | currency }} 
-</button>
+<div class="col text-center">
+<button class="button button-positive"> {{ $l_s.vp[ppIdx].ts }} 
+</button></div>
+<div class="col text-right">
+<button class="button button-balanced"> {{ $l_s.vp[ppIdx].tw | currency }} </button>
 </div>
   </div>
 </div>
-
-  <h2> </h2>
-    <div class="container-fluid">
-          <div class="widget-body">
-  <h4> </h4>
+  <div class="row-fluid"> 
   Copyright &copy; &middot; Lee DaBord &middot; Inglewood, CA. USA
-          </div>
-    </div>
+  </div>
   <h2> </h2>
 <div class="row">
   <div class="col">
@@ -106,12 +110,11 @@
   <i class="icon ion-ios-flame"></i> Wolf </a>
   </div>
 </div>
-
         </ion-content>
       </ion-view>
     </script>
 
-    <script id="templates/ALLscores.html" type="text/ng-template">
+      <script id="templates/ALLscores.html" type="text/ng-template">
       <ion-view view-title="All Scores">      <ion-content>
       <ion-list>
         <div ng-repeat="group in groups"  ng-init="hhIdx = $index">
