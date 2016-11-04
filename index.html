@@ -180,42 +180,55 @@
           <ion-item class="item-accordion"
  ng-repeat="pp in xxTimes($l_s.vm.pp)" ng-init="ppIdx = $index"
  ng-show="isGroupShown(group)">
-
-<div class="row">  <div class="col-33">
-<span class="button" ng-click="calcTsw()">
-  <button class="button button-energized">{{$l_s.vp[ppIdx].nm}}</button><br />
-  <span class="button button-small">{{$l_s.vp[ppIdx].th}}</span><br />
-  <span class="button button-small button-light">Points: {{$l_s.vp[ppIdx].wolfPts}}</span></span>
-</div>
+<div class="row"><div class="col-33 text-left">
+ <span class="button  button-energized">{{$l_s.vp[ppIdx].nm}} 
+  <span class="button button-small  button-energized"> ({{$l_s.vp[ppIdx].th}})</span>
+ </span>
+</div><div class="col text-right">
+ <span class="button button-small button-stable"> S: 
+  <span class="button button-small button-light"> {{$l_s.vp[ppIdx].ts}}
+  </span> </span>
+ <span class="button button-small button-stable"> J: 
+  <span class="button button-small button-light"> {{$l_s.vp[ppIdx].tw | currency}}
+  </span> </span>
+ <span class="button button-small button-stable"> W: 
+  <span class="button button-small button-light"> {{$l_s.vp[ppIdx].wolfPts}} 
+  </span> </span>
+</div></div>
+<hr>
+<div class="row">
 <div class="col text-center">
-  <button class="button button-small button-assertive" ng-click="adjVP(-1,ppIdx,hhIdx,'s')"> - </button> 
-  <button class="button button-large button-positive"  ng-click="adjVP(0,ppIdx,hhIdx,'s')">{{$l_s.vp[ppIdx].s[hhIdx]}}</button>
+  <span class="button button-small button-stable"> {{ $l_s.vp[ppIdx].w[hhIdx] | currency }} </span>
+<br />  <span class="button button-small button-light"> bonus:</span> <br />
+    <button class="button button-small button-stable" ng-click="adjVP(-1,ppIdx,hhIdx,'u')"> - </button>
+      <span class="button button-small button-calm"> {{ $l_s.vp[ppIdx].u2[hhIdx] | currency }} </span>
+    <button class="button button-small button-stable" ng-click="adjVP(1,ppIdx,hhIdx,'u')"> + </button>
+</div><div class="col text-center">
+<button class="button button-small button-assertive" ng-click="adjVP(-1,ppIdx,hhIdx,'s')"> - </button> 
+  <span class="button button-small  button-light">h:{{$l_s.vp[ppIdx].h[hhIdx]}}</span>
   <button class="button button-small button-balanced" ng-click="adjVP(1,ppIdx,hhIdx,'s')"> + </button> 
-  <br><br>  <span class="button button-small button-royal" ng-click="wrPop(ppIdx,hhIdx)">{{$l_s.vp[ppIdx].wolf[hhIdx].role}} <i class="icon ion-chevron-down"></i></span>
-
-</div>
-<div class="col text-right">
-<div>  <span class="button-small button-stable">winner:</span><br>
+<br />
+  <span class="button  button-positive"  ng-click="adjVP(0,ppIdx,hhIdx,'s')">{{$l_s.vp[ppIdx].s[hhIdx]}}</span>
+</div></div>
+<hr>
+<div class="row">
+<div class="col text-center">
+  <span class="button button-small button-royal" ng-click="wrPop(ppIdx,hhIdx)">{{$l_s.vp[ppIdx].wolf[hhIdx].role}} <i class="icon ion-chevron-down"></i></span>
+</div><div class="col text-right">
+<span class="button button-small button-light">winner:</span>
      <label class="toggle toggle-energized">
 <input type="checkbox" ng-model="$l_s.vp[ppIdx].wolf[hhIdx].winner" ng-change="adjVP(0,ppIdx,hhIdx,'s')">
        <div class="track">
          <div class="handle"></div>
        </div>
      </label>
-</div>  <br>
-<span class="button button-small button-light">pts: {{$l_s.vp[ppIdx].wolf[hhIdx].pts}}</span>
-</div>
-</div>
-
-</div>
-
-</div>
-
+<br>
+  <span class="button button-small button-light">pts: {{$l_s.vp[ppIdx].wolf[hhIdx].pts}}</span>
+</div></div>
       <h4> <br>  </h4>
           </ion-item>
         </div>
       </ion-list>
-
       </ion-content>      </ion-view>
     </script>
 
