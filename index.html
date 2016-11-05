@@ -48,13 +48,9 @@
     </span>
   </a>
   <a href="#/event/wolf" class="item item-icon-left" menu-close>
-      <i class="icon ion-social-usd-outline"></i>
-    JackPot <span class="item-note"> edit scores </span>
-  </a>              
-  <a href="#/event/wolf" class="item item-icon-left" menu-close>
-      <i class="icon ion-ios-flame-outline"></i>
-    WOLF <span class="item-note"> edit scores </span>
-  </a>              
+      <i class="icon ion-edit"></i>
+    Scores <span class="item-note"> edit scores </span>
+  </a>
   <a  href="#/event/players" class="item item-icon-left" menu-close>
     <i class="icon ion-person-stalker"></i>
     Setup Players  <span class="item-note">step 2</span>
@@ -103,70 +99,20 @@
 <div class="row">
   <div class="col">
 <a  href="#/event/wolf"  class="item item-icon-left">
-  <i class="icon ion-social-usd"></i> All Scores </a>
-  </div>
-  <div class="col">
-<a  href="#/event/wolf"  class="item item-icon-left"  menu-close>
-  <i class="icon ion-ios-flame"></i> Wolf </a>
+  <i class="icon ion-edit"></i> Edit Scores </a>
+  </div>  <div class="col">
+  <a href="#/event/match"  class="item item-icon-left" menu-close>
+    <i class="icon ion-ios-settings"></i>
+    Setup Match   
+  </a>  
   </div>
 </div>
         </ion-content>
       </ion-view>
     </script>
 
-      <script id="templates/ALLscores.html" type="text/ng-template">
-      <ion-view view-title="All Scores">      <ion-content>
-      <ion-list>
-        <div ng-repeat="group in groups"  ng-init="hhIdx = $index">
-          <ion-item class="item-stable"
-                    ng-click="toggleGroup(group)"
-                    ng-class="{active: isGroupShown(group)}">
-              <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
-            &nbsp;
-            <span class="button button-small button-calm">HOLE # {{$index+1}}</span>  
-            <span class="badge">  Par {{$l_s.vm.cp[$index]}} / h:{{$l_s.vm.ch[$index]}} </span>  
-          </ion-item>
-          <ion-item class="item-accordion"
- ng-repeat="pp in xxTimes($l_s.vm.pp)" ng-init="ppIdx = $index"
- ng-show="isGroupShown(group)">
-
-<div  class="row">
- <div class="col-25">
-  <span class="button button-light" ng-click="calcTsw()">{{$l_s.vp[ppIdx].nm}}</span>
- </div>
-<div class="col">
-  <button class="button button-small button-assertive" ng-click="adjVP(-1,ppIdx,hhIdx,'s')"> - </button> 
-  <button class="button button-small button-light">h:{{$l_s.vp[ppIdx].h[hhIdx]}}</button>  
-  <button class="button button-small button-balanced" ng-click="adjVP(1,ppIdx,hhIdx,'s')"> + </button> 
-
-  <div class="row">
-  <button class="button button-large button-positive" ng-click="adjVP(0,ppIdx,hhIdx,'s')">{{$l_s.vp[ppIdx].s[hhIdx]}}</button>
-  </div>
-
-  <div class="row">
-  <button class="button button-small button-light"></button>
-  </div>
-</div>
-<div class="col">
-      <button class="button button-balanced"> {{ $l_s.vp[ppIdx].w[hhIdx] | currency }} </button>
-  <div class="row">
-              <button class="button button-small button-stable" ng-click="adjVP(-1,ppIdx,hhIdx,'u')"> - </button>
-      <span class="button button-small button-calm"> {{ $l_s.vp[ppIdx].u2[hhIdx] | currency }} </span>
-              <button class="button button-small button-stable" ng-click="adjVP(1,ppIdx,hhIdx,'u')"> + </button>
-  </div>
- </div>
-
-</div>
-
-          </ion-item>
-        </div>
-      </ion-list>
-
-      </ion-content>      </ion-view>
-    </script>
-
     <script id="templates/wolf.html" type="text/ng-template">
-      <ion-view view-title="Wolf Scores">      <ion-content>
+      <ion-view view-title="Edit Scores">      <ion-content>
       <ion-list>
         <div ng-repeat="group in groups"  ng-init="hhIdx = $index">
           <ion-item class="item-stable"
