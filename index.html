@@ -69,28 +69,26 @@
     <script id="templates/home.html" type="text/ng-template">
       <ion-view view-title="Golf Match">
         <ion-content>
-<ion-list><ion-item>
-  <div class="row"> 
-  <div class="col">            <span class="button button-small button-light">{{$l_s.vm.loc}}  </span>
-            <span class="badge badge-light"> {{$l_s.vm.when}} </span>
+<div class="row-fluid">
+  <span class="button button-stable"> {{$l_s.vm.loc}}  </span>
+  <span class="badge badge-light"> {{$l_s.vm.when}} </span>
 </div>
 <div class="col"></div>
   </div>
-</ion-item></ion-list>
 <div  class="list card" ng-repeat="pp in xxTimes($l_s.vm.pp)" ng-init="ppIdx = $index">
-  <div class="row">  <div class="col-50">
-<button class="button" ng-click="calcTsw()"><span class="badge badge-energized">{{$l_s.vp[ppIdx].nm}}</span>
-  <span class="badge">{{$l_s.vp[ppIdx].th}}</span><br />
-            <span class="badge">Points: </span>
-<span class="badge badge-royal"> {{ $l_s.vp[ppIdx].wolfPts }} </span>
-</button></div>
+  <div class="row">  <div class="col-40">
+<span class="button" ng-click="calcTsw()"><span class="badge badge-energized">{{$l_s.vp[ppIdx].nm}}</span>
+  <span class="badge">{{$l_s.vp[ppIdx].th}}</span>
+</span></div>
 <div class="col text-center">
-<button class="button button-positive"> {{ $l_s.vp[ppIdx].ts }} 
-</button></div>
-<div class="col text-right">
-<button class="button button-balanced"> {{ $l_s.vp[ppIdx].tw | currency }} </button>
+<span class="button button-positive"> {{ $l_s.vp[ppIdx].ts }} </span>
 </div>
-  </div>
+<div class="col text-center">
+<span class="button button-small button-balanced"> {{ $l_s.vp[ppIdx].tw | currency }} </span>
+</div>
+<div class="col text-center">
+<button class="button button-small button-royal"> {{ $l_s.vp[ppIdx].wolfPts }} </button>
+</div></div>
 </div>
   <div class="row-fluid"> 
   Copyright &copy; &middot; Lee DaBord &middot; Inglewood, CA. USA
