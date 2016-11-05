@@ -122,7 +122,7 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
   }
 })
 
-.controller('MainCtrl', function($scope, $localStorage, $ionicSideMenuDelegate,
+.controller('MainCtrl', function($rootScope, $scope, $localStorage, $ionicSideMenuDelegate,
      $ionicModal, $ionicActionSheet, $ionicPopup, $timeout) {
 
   $scope.selCourseF = function (selCC) {
@@ -280,6 +280,7 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
   $scope.ppIdx = ppIdx;
   $scope.hhIdx = hhIdx;
   
+  $localStorage.vp[ppIdx].wolf[hhIdx] = angular.copy($rootScope.vp00.wolf[0]);
   $scope.adjVP(0,ppIdx,hhIdx,'s');
   
    // An elaborate, custom popup
