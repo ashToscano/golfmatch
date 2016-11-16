@@ -43,15 +43,6 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
           controller: "MainCtrl"
         }
       }
-    })
-    .state('eventmenu.wolf', {
-      url: "/wolf",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/wolf.html",
-          controller: "MainCtrl"
-        }
-      }
     });
   
   $urlRouterProvider.otherwise("/event/home");
@@ -292,31 +283,5 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
  };
 
 $scope.$l_s = $localStorage;
-
-   // A confirm dialog
-   $scope.showConfirm = function() {
-     var confirmPopup = $ionicPopup.confirm({
-       title: 'Consume Ice Cream',
-       template: 'Are you sure you want to eat this ice cream?'
-     });
-     confirmPopup.then(function(res) {
-       if(res) {
-         console.log('You are sure');
-       } else {
-         console.log('You are not sure');
-       }
-     });
-   };
-
-   // An alert dialog
-   $scope.showAlert = function() {
-     var alertPopup = $ionicPopup.alert({
-       title: 'Don\'t eat that!',
-       template: 'It might taste good'
-     });
-     alertPopup.then(function(res) {
-       console.log('Thank you for not eating my delicious ice cream cone');
-     });
-   };
 
 });
