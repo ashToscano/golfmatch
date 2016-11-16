@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html ng-app="ionicApp">
-<head>
+<head>  
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
 
@@ -47,7 +47,7 @@
       (home)
     </span>
   </a>
-  <a href="#/event/wolf" class="item item-icon-left" menu-close>
+  <a href="#/event/ALLscores" class="item item-icon-left" menu-close>
       <i class="icon ion-edit"></i>
     Scores <span class="item-note"> edit scores </span>
   </a>
@@ -108,7 +108,7 @@
       </ion-view>
     </script>
 
-    <script id="templates/wolf.html" type="text/ng-template">
+    <script id="templates/ALLscores.html" type="text/ng-template">
       <ion-view view-title="Edit Scores">      <ion-content>
       <ion-list>
         <div ng-repeat="group in groups"  ng-init="hhIdx = $index">
