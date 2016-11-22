@@ -123,44 +123,46 @@
           <ion-item class="item-accordion"
  ng-repeat="pp in xxTimes($l_s.vm.pp)" ng-init="ppIdx = $index"
  ng-show="isGroupShown(group)">
-<div class="row"><div class="col-33 text-left">
- <span class="button button-small button-stable">
- <span class="button button-energized">{{$l_s.vp[ppIdx].nm}} 
-  <span class="button button-small  button-energized"> ({{$l_s.vp[ppIdx].th}})</span> </span>
-<br />
- S:  {{$l_s.vp[ppIdx].ts}} <br />
- J:  {{$l_s.vp[ppIdx].tw | currency}} <br />
- W:  {{$l_s.vp[ppIdx].wolfPts}} 
- </span>
-</div><div class="col text-center">
-  <button class="button button-small button-assertive" ng-click="adjVP(-1,ppIdx,hhIdx,'s')"> - </button> 
+              <div class="row">
+                  <div class="col-25">
+                      <span class="button button-small button-stable" ng-click="calcTsw()">
+                          <span class="button button-small button-energized">
+                              {{$l_s.vp[ppIdx].nm}}                          </span>
+                          <span class="button button-small button-stable">{{$l_s.vp[ppIdx].th}}</span>
+                      </span>
+   <br />
+                  </div>
+                  <div class="col">
+                      <span class="button button-small button-light"> 
+                      Score: {{ $l_s.vp[ppIdx].ts }}  <span class="button button-small button-light"> </span>
+                      jPot: {{ $l_s.vp[ppIdx].tw | currency }}  <span class="button button-small button-light"> </span>
+                      Wolf: {{ $l_s.vp[ppIdx].wolfPts }} </span>
+                  </div>
+              </div>
+
+<div class="row"><div class="col text-center">
+  <button class="button button-small button-stable" ng-click="adjVP(-1,ppIdx,hhIdx,'s')"> - </button> 
   <span class="button button-small  button-light">h:{{$l_s.vp[ppIdx].h[hhIdx]}}</span>
-  <button class="button button-small button-balanced" ng-click="adjVP(1,ppIdx,hhIdx,'s')"> + </button> 
+  <button class="button button-small button-stable" ng-click="adjVP(1,ppIdx,hhIdx,'s')"> + </button> 
 <br /><br />
   <span class="button  button-positive"  ng-click="adjVP(0,ppIdx,hhIdx,'s')">{{$l_s.vp[ppIdx].s[hhIdx]}}</span>
 </div><div class="col text-center">
-  <span class="button button-small button-stable"> {{ $l_s.vp[ppIdx].w[hhIdx] | currency }} </span>
+  <span class="button button-small button-balanced"> {{ $l_s.vp[ppIdx].w[hhIdx] | currency }} </span>
 <br />  <span class="button button-small button-light"> bonus:</span> <br />
     <button class="button button-small button-stable" ng-click="adjVP(-1,ppIdx,hhIdx,'u')"> - </button>
-      <span class="button button-small button-calm"> {{ $l_s.vp[ppIdx].u2[hhIdx] | currency }} </span>
+      <span class="button button-small button-light"> {{ $l_s.vp[ppIdx].u2[hhIdx] | currency }} </span>
     <button class="button button-small button-stable" ng-click="adjVP(1,ppIdx,hhIdx,'u')"> + </button>
-</div></div>
-<h4></h4>
-<div class="row">
-<div class="col text-center">
-<span class="button button-small button-stable"> Wolf: </span>
-<span class="button button-small button-royal" ng-click="wrPop(ppIdx,hhIdx)">{{$l_s.vp[ppIdx].wolf[hhIdx].role}} &nbsp; <i class="icon ion-chevron-down"></i></span>
 </div><div class="col text-center">
-<span class="button button-small button-light">winner:</span>
-     <label class="toggle toggle-energized">
-<input type="checkbox" ng-model="$l_s.vp[ppIdx].wolf[hhIdx].winner" ng-change="adjVP(0,ppIdx,hhIdx,'s')">
-       <div class="track">
-         <div class="handle"></div>
-       </div>
-     </label>
-</div><div class="col text-right">
-  <span class="button button-small button-light">pts: {{$l_s.vp[ppIdx].wolf[hhIdx].pts}}</span>
-</div></div>
+    <span class="button button-small button-royal" ng-click="wrPop(ppIdx,hhIdx)">{{$l_s.vp[ppIdx].wolf[hhIdx].role}} &nbsp; <i class="icon ion-chevron-down"></i></span>
+          <br />  <span class="button button-small button-light"> winner:</span> <br />
+          <span class="button button-small button-light"> {{$l_s.vp[ppIdx].wolf[hhIdx].pts}}</span>
+          <label class="toggle toggle-energized">
+              <input type="checkbox" ng-model="$l_s.vp[ppIdx].wolf[hhIdx].winner" ng-change="adjVP(0,ppIdx,hhIdx,'s')">
+              <div class="track">
+                  <div class="handle"></div>
+              </div>
+          </label>
+</div>    </div>
       <h4> <br>  </h4>
           </ion-item>
         </div>
