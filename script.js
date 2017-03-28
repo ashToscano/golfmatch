@@ -176,7 +176,7 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
     }
   };
   $scope.calcTsw = function () {  
-    var pz4 = 0; var s = 0; var wxx = 1;
+    var pz4 = -15; var s = 0; var wxx = 1;
     $localStorage.vm.jp = $localStorage.vm.pp * $localStorage.vm.ww;
     for (ii = 0; ii < $localStorage.vm.pp; ii++) {
       $localStorage.vp[ii].ts = 0;
@@ -185,7 +185,7 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
       for (jj = 0; jj < 18; jj++) {
        if ($localStorage.vp[ii].s[jj] !== null) {
         s = $localStorage.vp[ii].s[jj] - $localStorage.vp[ii].h[jj];
-        pz4 = $localStorage.vm.pz4[s +4];
+        if (s < 6) { pz4 = $localStorage.vm.pz4[s +4]; }
         $localStorage.vp[ii].w[jj] = pz4;
         $localStorage.vp[ii].tw += pz4 + $localStorage.vp[ii].u2[jj];
         $localStorage.vp[ii].ts += $localStorage.vp[ii].s[jj] + $localStorage.vm.cp[jj];
