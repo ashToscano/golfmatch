@@ -185,7 +185,7 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
       for (jj = 0; jj < 18; jj++) {
        if ($localStorage.vp[ii].s[jj] !== null) {
         s = $localStorage.vp[ii].s[jj] - $localStorage.vp[ii].h[jj];
-        if (s < 0) { s = 0; }
+        if (s < -4) { s = -4; }
         if (s < 6) { pz4 = $localStorage.vm.pz4[s +4]; }
         $localStorage.vp[ii].w[jj] = pz4;
         $localStorage.vp[ii].tw += pz4 + $localStorage.vp[ii].u2[jj];
