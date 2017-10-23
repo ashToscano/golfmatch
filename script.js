@@ -152,6 +152,9 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
          case 'Hunter': 
            $localStorage.vp[ii].wolf[jj].pts = 3;
            break;
+         case 'Wolf': 
+           $localStorage.vp[ii].wolf[jj].pts = 2;
+           break;
          case 'Lone-W': 
            $localStorage.vp[ii].wolf[jj].pts = 4;
            break;
