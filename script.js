@@ -155,26 +155,18 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
          case 'Lone-W': 
            $localStorage.vp[ii].wolf[jj].pts = 4;
            break;
-         default: 
-           $localStorage.vp[ii].wolf[jj].pts = 2;
+         case 'Blind-W': 
+           $localStorage.vp[ii].wolf[jj].pts = 2 * 3;   // triple points for Blind-W
            break;
-        }
-      }
-      switch ($localStorage.vp[ii].wolf[jj].role) {
-       case 'Blind-W': 
-        wxx = 3;
-        break;
-       case '(pig)': 
-        wxx = 2;
-        break;
-       default: 
-        break;
-      }
-    }
-    for (ii = 0; ii < $localStorage.vm.pp; ii++) {
-      $localStorage.vp[ii].wolf[jj].pts *= wxx;
-    }
-  };
+         case '(pig)': 
+           $localStorage.vp[ii].wolf[jj].pts = 2 * 2;   // double points for (pig)
+           break;
+         default: 
+           break;
+         }   //  end switch
+      }   //  if winner
+    }   // for loop
+  };   //  end scope.wolfPts
   $scope.calcTsw = function () {  
     var pz4 = -15; var s = 0; var wxx = 1;
     $localStorage.vm.jp = $localStorage.vm.pp * $localStorage.vm.ww;
