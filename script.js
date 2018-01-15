@@ -80,7 +80,7 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
     w: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     u1: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     u2: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]  };
-  $rootScope.wwRR = ["Wolf", "Hunter", "Lone-W", "Blind-W", "(pig)"]; 
+  $rootScope.wwRR = ["Wolf", "Hunter", "Lone-W", "Blind-W", "(pig)", "xHunter"]; 
   $rootScope.xxTimes = function (nn) {
    var ii = 0;
    var aa = [];
@@ -149,6 +149,9 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
       $localStorage.vp[ii].wolf[jj].pts = 0;
       if ($localStorage.vp[ii].wolf[jj].winner) {
         switch ($localStorage.vp[ii].wolf[jj].role) {
+         case 'xHunter': 
+           $localStorage.vp[ii].wolf[jj].pts = 1;
+           break;
          case 'Hunter': 
            $localStorage.vp[ii].wolf[jj].pts = 3;
            break;
