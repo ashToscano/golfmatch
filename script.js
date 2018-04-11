@@ -1,4 +1,4 @@
-angular.module('ionicApp', ['ionic', 'ngStorage'])
+angular.module('ionicApp', ['ionic', 'ngResource', 'ngStorage'])
 
 .config(function($stateProvider, $urlRouterProvider) {
 
@@ -114,7 +114,7 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
 })
 
 .controller('MainCtrl', function($rootScope, $scope, $localStorage, $ionicSideMenuDelegate,
-     $ionicModal, $ionicActionSheet, $ionicPopup, $timeout) {
+     $ionicModal, $ionicActionSheet, $ionicPopup, $timeout, dbSvc) {
 
   $scope.selCourseF = function (selCC) {
     $localStorage.vm.loc = selCC.Nm.substring(0,15);
@@ -195,6 +195,8 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
       $localStorage.vm.jp -= $localStorage.vp[ii].tw;
     }
     $localStorage.vm.mip = true;
+  $scope.$l_s = $localStorage;  // , dbSvc
+  dbSvc.scoreById.update({recId:'5879174153893a6e000036e5'}, {type: "ngR.update", idx: Date.now(), vGMstats: $scope.$l_s});
   };
   $scope.adjVP = function (kk, ppIdx, hhIdx, ss) {  
     $localStorage.vp[ppIdx].s[hhIdx] += 0;
@@ -281,6 +283,35 @@ angular.module('ionicApp', ['ionic', 'ngStorage'])
    });
  };
 
-$scope.$l_s = $localStorage;
+  $scope.$l_s = $localStorage;  // , dbSvc
+  dbSvc.scoreById.update({recId:'5879174153893a6e000036e5'}, {type: "ngR.update", idx: Date.now(), vGMstats: $scope.$l_s});
 
+})
+
+.factory('dbSvc', function ($resource, $http) {
+
+  var _initRoster = function () {   // recMqVmgrTh17ixkj     // /recKbHjCbXLbJuSuJ
+    $http.get('https://api.airtable.com/v0/app0hohtq4b1nM0Kb/Players/recMqVmgrTh17ixkj?api_key=key66fQg5IghIIQmb')
+      .success(function (jsonData) {
+        localStorage.setItem('ls_vGM00', jsonData.fields.vGMstats);
+    });
+  };
+
+  var _allSongs = function () {
+//    return $resource('https://api.airtable.com/v0/app0hohtq4b1nM0Kb/Players?api_key=key66fQg5IghIIQmb');
+    return $resource('https://gwfl-256d.restdb.io/rest/songlist?apikey=5821f61550e9b39131fe1b6f');
+  };
+
+  var _scoreById = function () {
+    var url = 'https://gwfl-256d.restdb.io/rest/scores/:recId?apikey=5821f61550e9b39131fe1b6f';    //  5a6b9e9da07bee72000109a7   5879174153893a6e000036e5
+    return $resource(url,      
+    { recId: '@_id' }, 
+    { update: { method: 'PUT' } }
+  )};
+    
+  return {
+    initRoster: _initRoster(),
+    scoreById: _scoreById(),
+    allSongs: _allSongs().query()
+  };
 });
