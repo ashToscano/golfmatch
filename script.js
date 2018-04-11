@@ -116,6 +116,17 @@ angular.module('ionicApp', ['ionic', 'ngResource', 'ngStorage'])
 .controller('MainCtrl', function($rootScope, $scope, $localStorage, $ionicSideMenuDelegate,
      $ionicModal, $ionicActionSheet, $ionicPopup, $timeout, dbSvc) {
 
+  $scope.timer = function() {
+  var rsScore = dbSvc.scoreById.get({recId:'5879174153893a6e000036e5'}, function() {
+    $scope.$l_s = rsScore.vGMstats;
+    localStorage.setItem('ls_vGMstats', JSON.stringify(rsScore.vGMstats));
+    $localStorage = $scope.$l_s;
+  });
+  // $rootScope.appLog += 'y';
+  $timeout($scope.timer, 1500);    // 1.5 second delay
+};
+$timeout($scope.timer, 50);  
+  
   $scope.selCourseF = function (selCC) {
     $localStorage.vm.loc = selCC.Nm.substring(0,15);
     $localStorage.vm.cp = selCC.par; 
