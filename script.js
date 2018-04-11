@@ -94,21 +94,21 @@ angular.module('ionicApp', ['ionic', 'ngResource', 'ngStorage'])
     return aa;
   };
   $rootScope.clearLSvp = function() {
-    delete $localStorage.vp;
-    $localStorage.vp = [];  
-    $localStorage.vp.length = $localStorage.vm.pp;
+    // delete $localStorage.vp;
+    $rootScope.$l_s.vp = [];  
+    $rootScope.$l_s.vp.length = $rootScope.$l_s.vm.pp;
 
-    for (ii = 0; ii < $localStorage.vm.pp; ii++) {
-      $localStorage.vp[ii] = angular.copy($rootScope.vp00);
+    for (ii = 0; ii < $rootScope.$l_s.vm.pp; ii++) {
+      $rootScope.$l_s.vp[ii] = angular.copy($rootScope.vp00);
     }
   };
   $rootScope.clearLSvm = function() {
-    $localStorage.$reset();
-    $localStorage.vm = angular.copy($rootScope.vm00);
+    // $localStorage.$reset();
+    $rootScope.$l_s.vm = angular.copy($rootScope.vm00);
     $rootScope.clearLSvp();
   };  
 
-  if (angular.isUndefined($localStorage.vm)) {
+  if (angular.isUndefined($rootScope.$l_s.vm)) {
     $rootScope.clearLSvm();
   }
 })
@@ -118,9 +118,8 @@ angular.module('ionicApp', ['ionic', 'ngResource', 'ngStorage'])
 
   $scope.timer = function() {
   var rsScore = dbSvc.scoreById.get({recId:'5879174153893a6e000036e5'}, function() {
-    $scope.$l_s = rsScore.vGMstats;
+    $rootScope.$l_s = rsScore.vGMstats;
     localStorage.setItem('ls_vGMstats', JSON.stringify(rsScore.vGMstats));
-    $localStorage = $scope.$l_s;
   });
   // $rootScope.appLog += 'y';
   $timeout($scope.timer, 1500);    // 1.5 second delay
@@ -128,10 +127,10 @@ angular.module('ionicApp', ['ionic', 'ngResource', 'ngStorage'])
 $timeout($scope.timer, 50);  
   
   $scope.selCourseF = function (selCC) {
-    $localStorage.vm.loc = selCC.Nm.substring(0,15);
-    $localStorage.vm.cp = selCC.par; 
-    $localStorage.vm.ch = selCC.hcp; 
-    $localStorage.vm.jp = $localStorage.vm.pp * $localStorage.vm.ww;
+    $rootScope.$l_s.vm.loc = selCC.Nm.substring(0,15);
+    $rootScope.$l_s.vm.cp = selCC.par; 
+    $rootScope.$l_s.vm.ch = selCC.hcp; 
+    $rootScope.$l_s.vm.jp = $rootScope.$l_s.vm.pp * $rootScope.$l_s.vm.ww;
   };
   $scope.uTH = function(th, rr) {
     var jj = 0;
@@ -150,33 +149,33 @@ $timeout($scope.timer, 50);
     return aa;
   };
   $scope.vp18 = function(ii) {
-    for (jj = 0; jj < $localStorage.vm.pp; jj++) {
-      $localStorage.vp[jj].h = $scope.uTH($localStorage.vp[jj].th, $localStorage.vm.ch);
+    for (jj = 0; jj < $rootScope.$l_s.vm.pp; jj++) {
+      $rootScope.$l_s.vp[jj].h = $scope.uTH($rootScope.$l_s.vp[jj].th, $rootScope.$l_s.vm.ch);
     }
   };
   $scope.wolfPts = function(jj) {
     var wxx = 1, ii = 0;
-    for (ii = 0; ii < $localStorage.vm.pp; ii++) {
-      $localStorage.vp[ii].wolf[jj].pts = 0;
-      if ($localStorage.vp[ii].wolf[jj].winner) {
-        switch ($localStorage.vp[ii].wolf[jj].role) {
+    for (ii = 0; ii < $rootScope.$l_s.vm.pp; ii++) {
+      $rootScope.$l_s.vp[ii].wolf[jj].pts = 0;
+      if ($rootScope.$l_s.vp[ii].wolf[jj].winner) {
+        switch ($rootScope.$l_s.vp[ii].wolf[jj].role) {
          case 'xHunter': 
-           $localStorage.vp[ii].wolf[jj].pts = 1;
+           $rootScope.$l_s.vp[ii].wolf[jj].pts = 1;
            break;
          case 'Hunter': 
-           $localStorage.vp[ii].wolf[jj].pts = 3;
+           $rootScope.$l_s.vp[ii].wolf[jj].pts = 3;
            break;
          case 'Wolf': 
-           $localStorage.vp[ii].wolf[jj].pts = 2;
+           $rootScope.$l_s.vp[ii].wolf[jj].pts = 2;
            break;
          case 'Lone-W': 
-           $localStorage.vp[ii].wolf[jj].pts = 4;
+           $rootScope.$l_s.vp[ii].wolf[jj].pts = 4;
            break;
          case 'Blind-W': 
-           $localStorage.vp[ii].wolf[jj].pts = 2 * 3;   // triple points for Blind-W
+           $rootScope.$l_s.vp[ii].wolf[jj].pts = 2 * 3;   // triple points for Blind-W
            break;
          case '(pig)': 
-           $localStorage.vp[ii].wolf[jj].pts = 2 * 2;   // double points for (pig)
+           $rootScope.$l_s.vp[ii].wolf[jj].pts = 2 * 2;   // double points for (pig)
            break;
          default: 
            break;
@@ -186,37 +185,37 @@ $timeout($scope.timer, 50);
   };   //  end scope.wolfPts
   $scope.calcTsw = function () {  
     var pz4 = -15; var s = 0; var wxx = 1;
-    $localStorage.vm.jp = $localStorage.vm.pp * $localStorage.vm.ww;
-    for (ii = 0; ii < $localStorage.vm.pp; ii++) {
-      $localStorage.vp[ii].ts = 0;
-      $localStorage.vp[ii].tw = 0;
-      $localStorage.vp[ii].wolfPts = 0;
+    $rootScope.$l_s.vm.jp = $rootScope.$l_s.vm.pp * $rootScope.$l_s.vm.ww;
+    for (ii = 0; ii < $rootScope.$l_s.vm.pp; ii++) {
+      $rootScope.$l_s.vp[ii].ts = 0;
+      $rootScope.$l_s.vp[ii].tw = 0;
+      $rootScope.$l_s.vp[ii].wolfPts = 0;
       for (jj = 0; jj < 18; jj++) {
-       if ($localStorage.vp[ii].s[jj] !== null) {
-        s = $localStorage.vp[ii].s[jj] - $localStorage.vp[ii].h[jj];
+       if ($rootScope.$l_s.vp[ii].s[jj] !== null) {
+        s = $rootScope.$l_s.vp[ii].s[jj] - $rootScope.$l_s.vp[ii].h[jj];
         if (s < -4) { s = -4; }
-        if (s < 6) { pz4 = $localStorage.vm.pz4[s +4]; }
-        $localStorage.vp[ii].w[jj] = pz4;
-        $localStorage.vp[ii].tw += pz4 + $localStorage.vp[ii].u2[jj];
-        $localStorage.vp[ii].ts += $localStorage.vp[ii].s[jj] + $localStorage.vm.cp[jj];
+        if (s < 6) { pz4 = $rootScope.$l_s.vm.pz4[s +4]; }
+        $rootScope.$l_s.vp[ii].w[jj] = pz4;
+        $rootScope.$l_s.vp[ii].tw += pz4 + $rootScope.$l_s.vp[ii].u2[jj];
+        $rootScope.$l_s.vp[ii].ts += $rootScope.$l_s.vp[ii].s[jj] + $rootScope.$l_s.vm.cp[jj];
 
         $scope.wolfPts(jj);
-        $localStorage.vp[ii].wolfPts += $localStorage.vp[ii].wolf[jj].pts;
+        $rootScope.$l_s.vp[ii].wolfPts += $rootScope.$l_s.vp[ii].wolf[jj].pts;
       } }
-      $localStorage.vm.jp -= $localStorage.vp[ii].tw;
+      $rootScope.$l_s.vm.jp -= $rootScope.$l_s.vp[ii].tw;
     }
-    $localStorage.vm.mip = true;
-  $scope.$l_s = $localStorage;  // , dbSvc
-  dbSvc.scoreById.update({recId:'5879174153893a6e000036e5'}, {type: "ngR.update", idx: Date.now(), vGMstats: $scope.$l_s});
+    $rootScope.$l_s.vm.mip = true;
+ //   $scope.$l_s = $rootScope.$l_s;  // , dbSvc
+  dbSvc.scoreById.update({recId:'5879174153893a6e000036e5'}, {type: "ngR.update", idx: Date.now(), vGMstats: $rootScope.$l_s});
   };
   $scope.adjVP = function (kk, ppIdx, hhIdx, ss) {  
-    $localStorage.vp[ppIdx].s[hhIdx] += 0;
+    $rootScope.$l_s.vp[ppIdx].s[hhIdx] += 0;
     switch (ss) {
       case 's':
-        $localStorage.vp[ppIdx].s[hhIdx] += kk;
+        $rootScope.$l_s.vp[ppIdx].s[hhIdx] += kk;
         break;
       case 'u':
-        $localStorage.vp[ppIdx].u2[hhIdx] += kk;
+        $rootScope.$l_s.vp[ppIdx].u2[hhIdx] += kk;
         break;
       default:
         break;
@@ -235,7 +234,7 @@ $timeout($scope.timer, 50);
       items: [],
       show: false
     };
-    for (var j=0; j < $localStorage.vm.pp; j++) {
+    for (var j=0; j < $rootScope.$l_s.vm.pp; j++) {
       $scope.groups[i].items.push(i + '-' + j);
     }
   }
@@ -274,7 +273,7 @@ $timeout($scope.timer, 50);
   };
  
  $scope.selWR = function(wrv,ppIdx,hhIdx) {
-   $localStorage.vp[ppIdx].wolf[hhIdx].role = wrv;
+   $rootScope.$l_s.vp[ppIdx].wolf[hhIdx].role = wrv;
    $scope.myPopup.close();
  };
  // Triggered on a button click, or some other target
@@ -283,7 +282,7 @@ $timeout($scope.timer, 50);
   $scope.ppIdx = ppIdx;
   $scope.hhIdx = hhIdx;
   
-  $localStorage.vp[ppIdx].wolf[hhIdx] = angular.copy($rootScope.vp00.wolf[0]);
+  $rootScope.$l_s.vp[ppIdx].wolf[hhIdx] = angular.copy($rootScope.vp00.wolf[0]);
   $scope.adjVP(0,ppIdx,hhIdx,'s');
   
    // An elaborate, custom popup
@@ -294,8 +293,8 @@ $timeout($scope.timer, 50);
    });
  };
 
-  $scope.$l_s = $localStorage;  // , dbSvc
-  dbSvc.scoreById.update({recId:'5879174153893a6e000036e5'}, {type: "ngR.update", idx: Date.now(), vGMstats: $scope.$l_s});
+  // $scope.$l_s = $rootScope.$l_s;  // , dbSvc
+  dbSvc.scoreById.update({recId:'5879174153893a6e000036e5'}, {type: "ngR.update", idx: Date.now(), vGMstats: $rootScope.$l_s});
 
 })
 
