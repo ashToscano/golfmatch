@@ -123,7 +123,7 @@ angular.module('ionicApp', ['ionic', 'ngResource', 'ngStorage'])
     $localStorage = $scope.$l_s;
   });
   // $rootScope.appLog += 'y';
-  $timeout($scope.timer, 1500);    // 1.5 second delay
+  // $timeout($scope.timer, 1500);    // 1.5 second delay
 };
 $timeout($scope.timer, 50);  
   
