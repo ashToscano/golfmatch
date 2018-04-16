@@ -49,17 +49,10 @@ angular.module('ionicApp', ['ionic', 'ngResource', 'ngStorage'])
 })
 .run( function ($rootScope, $localStorage, $http) {
   var ii = 0;  var jj = 0;
-  // global variables  $rootScope
-  $rootScope.vCourses = [{
-        "Nm": "Chester Wash",
-        "rating": 69.5,
-        "slope": 117,
-        "par": [4,3,4,3,4,4,4,4,4,3,4,5,3,4,4,4,4,5],
-        "hcp": [9,15,11,17,13,5,3,7,1,18,12,14,6,8,4,10,2,16]
-  }];
-  //  https://gwfl.github.io/gsc/courses.json
-  $http.get('https://gwfl.github.io/gsc/courses.json').success(function (jsonData) {
-   $rootScope.vCourses = angular.copy(jsonData);
+  // global variables  $rootScope  
+  //  https://gwfl.github.io/gsc/courses.json  https://api.airtable.com/v0/app0hohtq4b1nM0Kb/Courses?api_key=key66fQg5IghIIQmb
+  $http.get('https://api.airtable.com/v0/app0hohtq4b1nM0Kb/Courses?api_key=key66fQg5IghIIQmb').success(function (jsonData) {
+    $rootScope.vCourses = angular.copy(jsonData.records);
   });
   $rootScope.vm00 = { when: "When", loc: "Where", pp: 0, ww: 0, tt: 0, 
     cp: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], ch: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -128,9 +121,10 @@ angular.module('ionicApp', ['ionic', 'ngResource', 'ngStorage'])
 $timeout($scope.timer, 50);  
   
   $scope.selCourseF = function (selCC) {
-    $localStorage.vm.loc = selCC.Nm.substring(0,15);
-    $localStorage.vm.cp = selCC.par; 
-    $localStorage.vm.ch = selCC.hcp; 
+    $localStorage.vm.loc = selCC.fields.Name.substring(0,15);
+    var sc = JSON.parse(selCC.fields.Scorecard);
+    $localStorage.vm.cp = sc.par; 
+    $localStorage.vm.ch = sc.hcp; 
     $localStorage.vm.jp = $localStorage.vm.pp * $localStorage.vm.ww;
   };
   $scope.uTH = function(th, rr) {
