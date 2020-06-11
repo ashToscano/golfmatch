@@ -1,4 +1,4 @@
-# gsc
-gwfl gsc
 
-just trying out: angular, bootstrap, jQueryMobile, etc. 
+testing the Edit feature of updated Plnkr ...   looks great so far
+
+New Record / Existing Record:  

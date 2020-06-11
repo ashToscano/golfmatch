@@ -1,310 +1,35 @@
 <!DOCTYPE html>
-<html ng-app="ionicApp">
-<head>
-   <meta charset="utf-8">
-   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Blank Ionic 1.3</title>
 
-   <title>GWFL GSC</title>
-
-  <link href="//code.ionicframework.com/1.3.3/css/ionic.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://code.ionicframework.com/nightly/css/ionic.css" />
+    <link rel="stylesheet" href="style.css" />
     <!-- ionic/angularjs js -->
-  <script src="https://code.ionicframework.com/1.3.3/js/ionic.bundle.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js" type="text/javascript"></script>
-  <script src="script.js"></script>
-</head>
+    <script src="https://code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-resource.min.js"></script>  <!-- 1.6.10 -->
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+    <!-- your app's js -->
+    <script src="app.js"></script>
+  </head>
 
-  <body ng-controller="MainCtrl">
-
-    <ion-nav-view></ion-nav-view>
-
-    <script id="templates/event-menu.html" type="text/ng-template">
-      <ion-side-menus enable-menu-with-back-views="false">
-
-        <ion-side-menu-content>
-          <ion-nav-bar class="bar-positive">
-            <ion-nav-back-button>
-            </ion-nav-back-button>
-
-            <ion-nav-buttons side="left">
-<a  href="#"><button class="button button-icon button-clear ion-ios-home-outline" menu-close></button></a>
-            </ion-nav-buttons>
-            <ion-nav-buttons side="right">
-              <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
-              </button>  </ion-nav-buttons>
-        </ion-nav-bar>
-
-          <ion-nav-view name="menuContent"></ion-nav-view>
-        </ion-side-menu-content> 
-
-        <ion-side-menu side="left">
-          <ion-header-bar class="bar-assertive">
-            <h1 class="title">Main Menu</h1>
-          </ion-header-bar>
-          <ion-content>
-<div class="list">
-  <a class="item item-icon-left" href="#" menu-close>
-    <i class="icon ion-ios-home-outline"></i>
-    Summary     <span class="item-note">
-      (home)
-    </span>
-  </a>
-  <a href="#/event/ALLscores" class="item item-icon-left" menu-close>
-      <i class="icon ion-edit"></i>
-    Scores <span class="item-note"> edit scores </span>
-  </a>
-  <a  href="#/event/players" class="item item-icon-left" menu-close>
-    <i class="icon ion-person-stalker"></i>
-    Setup Players  <span class="item-note">step 2</span>
-  </a>
-  <a href="#/event/match"  class="item item-icon-left" menu-close>
-    <i class="icon ion-ios-settings"></i>
-    Setup Match  <span class="item-note">Start Here </span>
-  </a>
-</div>
-          </ion-content>
-        </ion-side-menu>
-
-      </ion-side-menus>
-    </script>
-
-    <script id="templates/home.html" type="text/ng-template">
-      <ion-view view-title="Golf Match">
-        <ion-content>
-<div class="row-fluid">
-  Playing At: {{$l_s.vm.loc}} on: {{$l_s.vm.when}}
-</div>
-<div class="col"></div>
-  </div>
-<div  class="list card" ng-repeat="pp in xxTimes($l_s.vm.pp)" ng-init="ppIdx = $index">
-  <div class="row">  <div class="col-40">
-<span class="button" ng-click="calcTsw()"><span class="badge badge-energized">{{$l_s.vp[ppIdx].nm}}</span>
-  <span class="badge">{{$l_s.vp[ppIdx].th}}</span>
-</span></div>
-<div class="col text-center">
-<span class="button button-positive"> {{ $l_s.vp[ppIdx].ts }} </span>
-</div>
-<div class="col text-center">
-<span class="button button-small button-balanced"> {{ $l_s.vp[ppIdx].tw | currency }} </span>
-</div>
-<div class="col text-center">
-<button class="button button-small button-royal"> {{ $l_s.vp[ppIdx].wolfPts }} </button>
-</div></div>
-  <div class="row-fluid"> 
-<span class="button button-small button-light"> {{$l_s.vp[ppIdx].s[0]}} </span>
-<span class="button button-small button-light"> {{$l_s.vp[ppIdx].s[1]}} </span>
-<span class="button button-small button-light"> {{$l_s.vp[ppIdx].s[2]}} </span>
-<span class="button button-small button-light"> {{$l_s.vp[ppIdx].s[3]}} </span>
-<span class="button button-small button-light"> {{$l_s.vp[ppIdx].s[4]}} </span>
-<span class="button button-small button-light"> {{$l_s.vp[ppIdx].s[5]}} </span>
-<span class="button button-small button-light"> {{$l_s.vp[ppIdx].s[6]}} </span>
-<span class="button button-small button-light"> {{$l_s.vp[ppIdx].s[7]}} </span>
-<span class="button button-small button-light"> {{$l_s.vp[ppIdx].s[8]}} </span>
-  <br />  
-<span class="button button-small button-light"> {{$l_s.vp[ppIdx].s[9]}} </span>
-<span class="button button-small button-light"> {{$l_s.vp[ppIdx].s[10]}} </span>
-<span class="button button-small button-light"> {{$l_s.vp[ppIdx].s[11]}} </span>
-<span class="button button-small button-light"> {{$l_s.vp[ppIdx].s[12]}} </span>
-<span class="button button-small button-light"> {{$l_s.vp[ppIdx].s[13]}} </span>
-<span class="button button-small button-light"> {{$l_s.vp[ppIdx].s[14]}} </span>
-<span class="button button-small button-light"> {{$l_s.vp[ppIdx].s[15]}} </span>
-<span class="button button-small button-light"> {{$l_s.vp[ppIdx].s[16]}} </span>
-<span class="button button-small button-light"> {{$l_s.vp[ppIdx].s[17]}} </span>
-  </div>
-</div>
-  <div class="row-fluid"> 
-  Copyright &copy; &middot; Lee DaBord &middot; Inglewood, CA. USA
-  </div>
-  <h2> </h2>
-<div class="row">
-  <div class="col">
-<a  href="#/event/ALLscores"  class="item item-icon-left">
-  <i class="icon ion-edit"></i> Edit Scores </a>
-  </div>  <div class="col">
-  <a href="#/event/match"  class="item item-icon-left" menu-close>
-    <i class="icon ion-ios-settings"></i>
-    Setup Match   
-  </a>  
-  </div>
-</div>
-        </ion-content>
-      </ion-view>
-    </script>
-
-    <script id="templates/ALLscores.html" type="text/ng-template">
-      <ion-view view-title="Edit Scores">      <ion-content>
-      <ion-list>
-        <div ng-repeat="group in groups"  ng-init="hhIdx = $index">
-          <ion-item class="item-stable"
-                    ng-click="toggleGroup(group)"
-                    ng-class="{active: isGroupShown(group)}">
-              <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
-            &nbsp;
-            <span class="button button-small button-calm">HOLE # {{$index+1}}</span>  
-            <span class="badge">  Par {{$l_s.vm.cp[$index]}} / h:{{$l_s.vm.ch[$index]}} </span>  
-          </ion-item>
-          <ion-item class="item-accordion"
- ng-repeat="pp in xxTimes($l_s.vm.pp)" ng-init="ppIdx = $index"
- ng-show="isGroupShown(group)">
-              <div class="row">
-                  <div class="col-25">
-                      <span class="button button-small button-stable" ng-click="calcTsw()">
-                          <span class="button button-small button-energized">
-                              {{$l_s.vp[ppIdx].nm}}                          </span>
-                          <span class="button button-small button-stable">{{$l_s.vp[ppIdx].th}}</span>
-                      </span>
-   <br />
-                  </div>
-                  <div class="col">
-                      <span class="button button-small button-light"> 
-                      Score: {{ $l_s.vp[ppIdx].ts }}  <span class="button button-small button-light"> </span>
-                      jPot: {{ $l_s.vp[ppIdx].tw | currency }}  <span class="button button-small button-light"> </span>
-                      Wolf: {{ $l_s.vp[ppIdx].wolfPts }} </span>
-                  </div>
-              </div>
-
-<div class="row"><div class="col text-center">
-  <button class="button button-small button-stable" ng-click="adjVP(-1,ppIdx,hhIdx,'s')"> - </button> 
-  <span class="button button-small  button-light">h:{{$l_s.vp[ppIdx].h[hhIdx]}}</span>
-  <button class="button button-small button-stable" ng-click="adjVP(1,ppIdx,hhIdx,'s')"> + </button> 
-<br /><br />
-  <span class="button  button-positive"  ng-click="adjVP(0,ppIdx,hhIdx,'s')">{{$l_s.vp[ppIdx].s[hhIdx]}}</span>
-</div><div class="col text-center">
-  <span class="button button-small button-balanced"> {{ $l_s.vp[ppIdx].w[hhIdx] | currency }} </span>
-<br />  <span class="button button-small button-light"> bonus:</span> <br />
-    <button class="button button-small button-stable" ng-click="adjVP(-1,ppIdx,hhIdx,'u')"> - </button>
-      <span class="button button-small button-light"> {{ $l_s.vp[ppIdx].u2[hhIdx] | currency }} </span>
-    <button class="button button-small button-stable" ng-click="adjVP(1,ppIdx,hhIdx,'u')"> + </button>
-</div><div class="col text-center">
-    <span class="button button-small button-royal" ng-click="wrPop(ppIdx,hhIdx)">{{$l_s.vp[ppIdx].wolf[hhIdx].role}} &nbsp; <i class="icon ion-chevron-down"></i></span>
-          <br />  <span class="button button-small button-light"> winner:</span> <br />
-          <span class="button button-small button-light"> {{$l_s.vp[ppIdx].wolf[hhIdx].pts}}</span>
-          <label class="toggle toggle-energized">
-              <input type="checkbox" ng-model="$l_s.vp[ppIdx].wolf[hhIdx].winner" ng-change="adjVP(0,ppIdx,hhIdx,'s')">
-              <div class="track">
-                  <div class="handle"></div>
-              </div>
-          </label>
-</div>    </div>
-      <h4> <br>  </h4>
-          </ion-item>
-        </div>
-      </ion-list>
-      </ion-content>      </ion-view>
-    </script>
-
-    <script id="templates/players.html" type="text/ng-template">
-      <ion-view view-title="Setup Players">
-        <ion-content>
-<div class="list">
-  <div class="item">
-          <div class="row-fluid"> Course Par: <span class="button button-small button-royal">{{ $l_s.vm.cp }}</span></div>
-          <div class="row-fluid"> Course Hcp: <span class="button button-small button-energized">{{ $l_s.vm.ch }}</span></div>
-  <h2> </h2>
-  </div>
-<div  class="item" ng-repeat="pp in xxTimes($l_s.vm.pp)" ng-init="ppIdx = $index">
-  <div class="row">
-  <div class="col-50">    <label class="item item-input item-floating-label">
-    <span class="input-label">Name {{ppIdx+1}}</span>
-    <input ng-model="$l_s.vp[ppIdx].nm" type="text" placeholder="name">
-  </label>  </div>
-  <div class="col-20 col-offset-10">    <label class="item item-input item-floating-label">
-    <span class="input-label">Hcp:</span>
-    <input ng-model="$l_s.vp[ppIdx].th" type="number" placeholder="hcp">
-  </label>  </div>
-  </div>
-  <h4> </h4>
-  <div class="row">
-    hcp: <span class="button button-small button-stable">{{$l_s.vp[ppIdx].h}}:</span>
-  </div>                
-</div>
-  <div class="item">
-<a  href="#" menu-close><button class="button button-small button-positive" ng-click="vp18($index)"> Done </button></a>
-  </div>
-</div>
-        </ion-content>
-      </ion-view>
-    </script>
-
-    <script id="templates/match.html" type="text/ng-template">
-      <ion-view view-title="Setup Match">
-        <ion-content>
-  <div class="list">
-  <div class="col-10 col-offset-90">
-  <a  href="#/event/match" class="button button-small button-light button-outline" ng-click="clearLSvm()">
-    <span class="item-note">Reset</span>
-  </a>
-</div></div>
-  <div class="row">
-  <div class="col">
-          <label class="item item-input item-select">
-          {{$l_s.vm.loc}}
-          <select ng-options="cc.Nm for cc in vCourses track by cc.Nm"
-                  ng-model="selCC"
-                  ng-change="selCourseF(selCC)" style="width: 30px">
-          </select> 
-        </label>
-  </div>
-  <div class="col col-33">
-  <label class="item item-input">
-    <input type="text" placeholder="When:" ng-model="$l_s.vm.when">
-  </label>
-  </div>
-  </div>
-  <div class="row">
-  <div class="col">    <label class="item item-input item-floating-label">
-    <span class="input-label"># Players:</span>
-    <input ng-model="$l_s.vm.pp" type="number" placeholder="0">
-  </label>  </div>
-  <div class="col">    <label class="item item-input item-floating-label">
-    <span class="input-label">Wager:</span>
-    <input ng-model="$l_s.vm.ww" type="number"  placeholder="0" />
-            </label>  </div>
-  </div>
-              <hr> <h4> JackPot PRIZES:</h4>
-                <h4>   </h4>
-  <div class="row">
-  <div class="col col-20" ng-repeat="pz in xxTimes(5)">
-                    <span class="button button-small button-energized"> [ {{$index - 4}} ] </span>
-                    <input class="item item-input" ng-model="$l_s.vm.pz4[$index]" type="number" />
-  </div>
-  </div>
-                <h4>   </h4>
-  <div class="row">
-  <div class="col col-20" ng-repeat="pz in xxTimes(5)">
-                    <span class="button button-small button-energized"> [ {{$index+1}} ] </span>
-                    <input class="item item-input" ng-model="$l_s.vm.pz4[$index+5]" type="number" />
-  </div>
-  </div>
-
-                <h4>   </h4>
-
-<div class="row">
-  <a  href="#/event/players" class="button button-positive button-outline"  ng-click="clearLSvp()" menu-close>
-    <i class="icon ion-person-stalker"></i>
-    Setup Players
-  </a>
-</div>
-      </ion-content>
-      </ion-view>
-    </script>
+  <body ng-app="gscAppH">
+ 
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
     
+    <ion-nav-view> Loading ... </ion-nav-view>
+
     <script id="wrPopup.html" type="text/ng-template">
 
     <ion-radio name="wRole" ng-repeat="wr in wwRR" ng-value="wr" ng-model="role" ng-change="selWR(wr,ppIdx,hhIdx);">
           {{ wr }}
         </ion-radio>    
-    </script>
-    
-    <script id="gcPopup.html" type="text/ng-template">
-    <ion-radio ng-repeat="gc in vCourses"
-                   ng-value="gc.Nm"
-                   ng-model="selCC"
-                   ng-change="selCourseF(selCC)"
-                   name="selGC">
-      {{ gc.Nm }}
-    </ion-radio>    
     </script>
 
   </body>
